@@ -8,18 +8,28 @@ namespace Segmage.Services
     public abstract class SenderBase
     {
         private readonly AppOptions _options;
-
+        private string ToRequestUri(string path)=>string.Format(path, _options.BatchUrl);
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="options"></param>
         protected SenderBase(AppOptions options)
         {
             _options = options;
         }
-
-        protected async Task<ServiceResult> PostRequestAsync(string url, object body,CancellationToken cancellationToken=default)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="path"></param>
+        /// <param name="body"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
+        protected async Task<ServiceResult> PostRequestAsync(string path, object body,CancellationToken cancellationToken=default)
         {
             var result = new ServiceResult();
             using (var httpClient = new HttpClient())
             {
-                using (var request = new HttpRequestMessage(new HttpMethod("POST"), url))
+                using (var request = new HttpRequestMessage(new HttpMethod("POST"),ToRequestUri(path)))
                 {
                     request.Headers.TryAddWithoutValidation("Authorization",
                         "Bearer " + _options.Credential.AccessToken);
@@ -40,16 +50,15 @@ namespace Segmage.Services
                     }
                 }
             }
-
             return result;
         }
       
-        protected async Task<ServiceResult> GetRequestAsync(string url,CancellationToken cancellationToken=default)
+        protected async Task<ServiceResult> GetRequestAsync(string path,CancellationToken cancellationToken=default)
         {
             var result = new ServiceResult();
             using (var httpClient = new HttpClient())
             {
-                using (var request = new HttpRequestMessage(new HttpMethod("GET"), url))
+                using (var request = new HttpRequestMessage(new HttpMethod("GET"), ToRequestUri(path)))
                 {
                     request.Headers.TryAddWithoutValidation("Authorization",
                         "Bearer " + _options.Credential.AccessToken);
@@ -67,7 +76,6 @@ namespace Segmage.Services
                     }
                 }
             }
-
             return result;
         }
 

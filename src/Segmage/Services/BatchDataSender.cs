@@ -25,10 +25,15 @@ namespace Segmage.Services
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
         /// <exception cref="NotImplementedException"></exception>
-        public async Task<ServiceResult> SendAsync(DataTable data, CancellationToken cancellationToken = default)
-        {
-            
-            throw new NotImplementedException();
-        }
+        public async Task<ServiceResult> SendAsync(DataTable data, CancellationToken cancellationToken = default) => await PostRequestAsync(ApiUriConsts.BATCH_DATA_EVENT, data, cancellationToken);
+        
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="data"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
+        public async Task<ServiceResult> UploadJsonAsync(DataTable data, CancellationToken cancellationToken = default)
+      => await PostRequestAsync(ApiUriConsts.UPLOAD_BATCH_DATA_EVENT, data, cancellationToken);
     }
 }

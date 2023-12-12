@@ -7,7 +7,7 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\..\src\Segmage.Core.Extensions\Segmage.Core.Extensions.csproj" />
+      <PackageReference Include="Segmage.Core.Extensions" Version="1.0.0" />
     </ItemGroup>
 
 </Project>

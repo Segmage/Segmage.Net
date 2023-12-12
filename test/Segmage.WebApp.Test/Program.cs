@@ -1,6 +1,6 @@
 using Segmage;
 using Segmage.Core.Extensions;
-using Segmage.Credential;
+using Segmage.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,6 +11,11 @@ var app = builder.Build();
 
 app.MapGet("/", async () =>
 {
-    
+    await SegmageApp.DefaultInstance.EventSender.SendCustomEventAsync(new CustomEvent
+    { 
+        UserId = "1",
+        
+        
+    });
 });
 app.Run();

@@ -28,7 +28,10 @@ namespace Segmage
         /// 
         /// </summary>
         public  SegmageCredential Credential { get; set; }
-        
+
+        public string EventUrl { get; set; } = "https://collect.segmage.dev";
+        public string BatchUrl { get; set; } = "https://batch.segmage.dev";
+
         /// <summary>
         /// 
         /// </summary>
