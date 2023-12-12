@@ -1,0 +1,41 @@
+<Project Sdk="Microsoft.NET.Sdk">
+    <PropertyGroup>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+        <LangVersion>10</LangVersion>
+        <Description>Segmage Event &amp; Data Sender .Net Core Dependency Extension</Description>
+        <VersionPrefix>1.0.0.1</VersionPrefix>
+        <Authors>Segmage </Authors>
+        <TargetFrameworks Condition=" '$(OS)' == 'Windows_NT'">net462;net471</TargetFrameworks>
+        <TargetFrameworks>net6.0;net5.0;net7.0</TargetFrameworks>
+        <GenerateDocumentationFile>true</GenerateDocumentationFile>
+        <PackageTags>segmage;event;sender;cdp</PackageTags>
+        <PackageIcon>icon.jpg</PackageIcon>
+        <PackageProjectUrl>https://www.segmage.com</PackageProjectUrl>
+        <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
+        <GenerateAssemblyVersionAttribute>false</GenerateAssemblyVersionAttribute>
+        <TreatSpecificWarningsAsErrors />
+        <IsTrimmable>true</IsTrimmable>
+        <NoWarn>$(NoWarn);CS1437;CS1570</NoWarn>
+        <PolySharpIncludeRuntimeSupportedAttributes>true</PolySharpIncludeRuntimeSupportedAttributes>
+        <PublishRepositoryUrl>true</PublishRepositoryUrl>
+        <EmbedUntrackedSources>true</EmbedUntrackedSources>
+        <IncludeSymbols>true</IncludeSymbols>
+        <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+        <PackageReadmeFile>README.md</PackageReadmeFile>
+        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+        <Title>Segmage.Net Core Dependency Extension</Title>
+        <Version>1.0.0.0</Version>
+        <RepositoryType>git</RepositoryType>
+    </PropertyGroup>
+    <ItemGroup>
+        <None Include="../../assets/icon.jpg" Pack="true" Visible="false" PackagePath="/" />
+        <None Include="../../README.md" Pack="true" Visible="false" PackagePath="/" />
+    </ItemGroup>
+    <ItemGroup>
+      <ProjectReference Include="..\Segmage\Segmage.csproj" />
+    </ItemGroup>
+    <ItemGroup>
+      <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="8.0.0" />
+    </ItemGroup>
+</Project>
