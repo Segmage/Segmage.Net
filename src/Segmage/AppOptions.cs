@@ -15,15 +15,7 @@ namespace Segmage
         {
             
         }
-       
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="accessToken"></param>
-        public AppOptions(string accessToken)
-        {
-            FromAccessToken(accessToken);
-        }
+        
         /// <summary>
         /// 
         /// </summary>
@@ -37,7 +29,7 @@ namespace Segmage
         /// </summary>
         /// <param name="accessToken"></param>
         /// <returns></returns>
-        public SegmageCredential FromAccessToken(string accessToken)
+        public AppOptions FromAccessToken(string accessToken)
         {
             var json =JsonConvert.SerializeObject(new SegmageCredential()
             {
@@ -51,9 +43,9 @@ namespace Segmage
         /// </summary>
         /// <param name="json"></param>
         /// <returns></returns>
-        public SegmageCredential FromJson(string json)
+        public AppOptions FromJson(string json)
         {
-           return JsonConvert.DeserializeObject<SegmageCredential>(json);
+           return JsonConvert.DeserializeObject<AppOptions>(json);
         }
         
         /// <summary>
@@ -61,7 +53,7 @@ namespace Segmage
         /// </summary>
         /// <param name="path"></param>
         /// <returns></returns>
-        public SegmageCredential FromFile(string path)
+        public AppOptions FromFile(string path)
         {
             using (var stream = File.OpenRead(path))
             {
@@ -74,7 +66,7 @@ namespace Segmage
         /// </summary>
         /// <param name="path"></param>
         /// <returns></returns>
-        public async Task<SegmageCredential> FromFileAsync(string path)
+        public async Task<AppOptions> FromFileAsync(string path)
         {
             using (var stream = File.OpenRead(path))
             {
@@ -84,7 +76,7 @@ namespace Segmage
 
         #region Private Members
 
-        private async Task<SegmageCredential> FromStreamAsync(Stream stream)
+        private async Task<AppOptions> FromStreamAsync(Stream stream)
         {
             try
             {
@@ -93,7 +85,7 @@ namespace Segmage
                     var json = await streamReader.ReadToEndAsync();
                     using (var reader = new JsonTextReader(new StringReader(json)))
                     {
-                        return  JsonSerializer.CreateDefault().Deserialize<SegmageCredential>(reader);
+                        return  JsonSerializer.CreateDefault().Deserialize<AppOptions>(reader);
                     }
                 }
             }
@@ -103,7 +95,7 @@ namespace Segmage
             }
         }
        
-        private SegmageCredential FromStream(Stream stream)
+        private AppOptions FromStream(Stream stream)
         {
             try
             {
@@ -112,7 +104,7 @@ namespace Segmage
                     var json =  streamReader.ReadToEnd();
                     using (var reader = new JsonTextReader(new StringReader(json)))
                     {
-                        return  JsonSerializer.CreateDefault().Deserialize<SegmageCredential>(reader);
+                        return  JsonSerializer.CreateDefault().Deserialize<AppOptions>(reader);
                     }
                 }
             }

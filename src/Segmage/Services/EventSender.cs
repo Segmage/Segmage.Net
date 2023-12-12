@@ -20,7 +20,9 @@ namespace Segmage.Services
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
         public async Task<ServiceResult> SetSessionAsync(SessionEvent @event,CancellationToken cancellationToken=default)=> await PostRequestAsync(ApiUriConsts.SET_SESSION, @event,cancellationToken);
-
+        
+        public async Task<ServiceResult> BasketSyncAsync(Basket @event,CancellationToken cancellationToken=default)=> await PostRequestAsync(ApiUriConsts.BASEKET_EVENT, @event,cancellationToken);
+        
         /// <summary>
         /// 
         /// </summary>

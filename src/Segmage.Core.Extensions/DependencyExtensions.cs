@@ -27,13 +27,5 @@ namespace Segmage.Core.Extensions
             return services;
         }
         
-        public static IServiceCollection AddSegmage(this IServiceCollection services,string accessToken)=>services.AddSegmage("[DEFAULT]",accessToken);
-        
-        public static IServiceCollection AddSegmage(this IServiceCollection services,string name,string accessToken) 
-        {
-            if (services == null||string.IsNullOrEmpty(accessToken)) throw new ArgumentNullException(nameof(services));
-            SegmageApp.CreateInstance(new AppOptions(accessToken),name);
-            return services;
-        }
     }
 }

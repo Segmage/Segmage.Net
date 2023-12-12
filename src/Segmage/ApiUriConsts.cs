@@ -9,6 +9,7 @@ namespace Segmage
         public const string SEARCH_EVENT = "{0}/Search";
         public const string CUSTOM_EVENT = "{0}/Custom";
         public const string GOAL_EVENT = "{0}/Goal";
+        public const string BASEKET_EVENT = "{0}/Basket";
         public const string ADD_TO_BASEKET_EVENT = "{0}/AddToBasket";
         public const string REMOVE_FROM_BASKET_EVENT = "{0}/RemoveFromBasket";
         public const string BATCH_DATA_EVENT = "{0}/SendBatchData";
