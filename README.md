@@ -39,5 +39,5 @@ Segmage.NET SDK is licensed under the
 [Apache License, version 2.0](http://www.apache.org/licenses/LICENSE-2.0).
 
 Your use of Segmage is governed by the
-[Terms of Service for Firebase Services](https://www.segmage.com/terms/).
+[Terms of Service for Segmage Services](https://www.segmage.com/terms/).
 
