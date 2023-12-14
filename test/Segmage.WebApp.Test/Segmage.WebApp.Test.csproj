@@ -10,4 +10,13 @@
       <PackageReference Include="Segmage.Core.Extensions" Version="1.0.0" />
     </ItemGroup>
 
+    <ItemGroup>
+      <None Include="..\..\README.md">
+        <Pack>true</Pack>
+        <Visible>false</Visible>
+        <PackagePath>/</PackagePath>
+        <Link>README.md</Link>
+      </None>
+    </ItemGroup>
+
 </Project>

@@ -9,7 +9,7 @@
         <TargetFrameworks Condition=" '$(OS)' == 'Windows_NT'">net462;net471</TargetFrameworks>
         <TargetFrameworks>net6.0;net5.0;net7.0</TargetFrameworks>
         <GenerateDocumentationFile>true</GenerateDocumentationFile>
-        <PackageTags>segmage;event;sender;cdp</PackageTags>
+        <PackageTags>segmage;cdp;eventsender;segmentation</PackageTags>
         <PackageIcon>icon.jpg</PackageIcon>
         <PackageProjectUrl>https://www.segmage.com</PackageProjectUrl>
         <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
@@ -25,15 +25,17 @@
         <PackageReadmeFile>README.md</PackageReadmeFile>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
         <Title>Segmage.Net Core Dependency Extension</Title>
-        <Version>1.0.0.1</Version>
+        <Version>1.0.0.2</Version>
         <RepositoryType>git</RepositoryType>
+        <Copyright>Segmage 2023</Copyright>
+        <RepositoryUrl>https://github.com/Segmage/Segmage.Net.git</RepositoryUrl>
     </PropertyGroup>
     <ItemGroup>
         <None Include="../../assets/icon.jpg" Pack="true" Visible="false" PackagePath="/" />
-        <None Include="../../README.md" Pack="true" Visible="false" PackagePath="/" />
+        <None Include="../../assets/Segmage.Core.Extensions/README.md" Pack="true" Visible="false" PackagePath="/" />
     </ItemGroup>
     <ItemGroup>
       <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="8.0.0" />
-      <PackageReference Include="Segmage" Version="1.0.0" />
+      <PackageReference Include="Segmage" Version="1.0.0.2" />
     </ItemGroup>
 </Project>

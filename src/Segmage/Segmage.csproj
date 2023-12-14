@@ -1,12 +1,12 @@
 <Project Sdk="Microsoft.NET.Sdk">
     <PropertyGroup>
-        <Description>Segmage Data &amp; Event Sender</Description>
+        <Description>Segmage; Data &amp; Event Sender</Description>
         <VersionPrefix>1.0.0.1</VersionPrefix>
         <Authors>Segmage </Authors>
         <TargetFrameworks Condition=" '$(OS)' == 'Windows_NT'">net462;net471</TargetFrameworks>
         <TargetFrameworks>$(TargetFrameworks);netstandard2.1;netstandard2.0;net5.0;net6.0;net7.0</TargetFrameworks>
         <GenerateDocumentationFile>true</GenerateDocumentationFile>
-        <PackageTags>segmage;event;sender;cdp</PackageTags>
+        <PackageTags>segmage;cdp;eventsender;segmentation</PackageTags>
         <PackageIcon>icon.jpg</PackageIcon>
         <PackageProjectUrl>https://www.segmage.com</PackageProjectUrl>
         <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
@@ -22,15 +22,14 @@
         <PackageReadmeFile>README.md</PackageReadmeFile>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
         <Title>Segmage</Title>
-        <Version>1.0.0.1</Version>
+        <Version>1.0.0.2</Version>
         <Copyright>Segmage 2023</Copyright>
-        <PackageLicenseUrl></PackageLicenseUrl>
         <RepositoryUrl>https://github.com/Segmage/Segmage.Net.git</RepositoryUrl>
         <RepositoryType>git</RepositoryType>
     </PropertyGroup>
     <ItemGroup>
         <None Include="../../assets/icon.jpg" Pack="true" Visible="false" PackagePath="/" />
-        <None Include="../../README.md" Pack="true" Visible="false" PackagePath="/" />
+        <None Include="../../assets/Segmage/README.md" Pack="true" Visible="false" PackagePath="/" />
     </ItemGroup>
     <ItemGroup>
       <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
