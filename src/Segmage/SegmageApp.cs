@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Segmage.Services;
 
 namespace Segmage
@@ -58,7 +59,7 @@ namespace Segmage
             AppManager.Apps.TryGetValue(name, out var app);
             return app;
         }
-        
+
         /// <summary>
         /// 
         /// </summary>

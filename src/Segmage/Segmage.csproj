@@ -8,7 +8,7 @@
         <GenerateDocumentationFile>true</GenerateDocumentationFile>
         <PackageTags>segmage;cdp;eventsender;segmentation</PackageTags>
         <PackageIcon>icon.jpg</PackageIcon>
-        <PackageProjectUrl>https://www.segmage.com</PackageProjectUrl>
+        <PackageProjectUrl>https://www.segmage.com?utm_source=sdk&amp;utm_medium=nugetorg</PackageProjectUrl>
         <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
         <GenerateAssemblyVersionAttribute>false</GenerateAssemblyVersionAttribute>
         <TreatSpecificWarningsAsErrors />
@@ -22,7 +22,7 @@
         <PackageReadmeFile>README.md</PackageReadmeFile>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
         <Title>Segmage</Title>
-        <Version>1.0.0.3</Version>
+        <Version>1.0.0.4</Version>
         <Copyright>Segmage 2023</Copyright>
         <RepositoryUrl>https://github.com/Segmage/Segmage.Net.git</RepositoryUrl>
         <RepositoryType>git</RepositoryType>

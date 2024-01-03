@@ -15,20 +15,19 @@ namespace Segmage
         {
             
         }
-        
+        public string AppInstanceName { get; set; }
         /// <summary>
         /// 
         /// </summary>
         public  SegmageCredential Credential { get; set; }
 
-        public string EventUrl { get; set; } = "https://collect.segmage.dev";
-        public string BatchUrl { get; set; } = "https://batch.segmage.dev";
+        public string CollectUrl { get; set; } = "https://collect.segmage.com";
 
         /// <summary>
         /// 
         /// </summary>
         /// <param name="accessToken"></param>
-        /// <returns></returns>
+        /// <returns>AppOptions</returns>
         public AppOptions FromAccessToken(string accessToken)
         {
             var json =JsonConvert.SerializeObject(new SegmageCredential()
@@ -42,8 +41,8 @@ namespace Segmage
         /// 
         /// </summary>
         /// <param name="json"></param>
-        /// <returns></returns>
-        public AppOptions FromJson(string json)
+        /// <returns>AppOptions</returns>
+        public static AppOptions FromJson(string json)
         {
            return JsonConvert.DeserializeObject<AppOptions>(json);
         }
@@ -52,8 +51,8 @@ namespace Segmage
         /// 
         /// </summary>
         /// <param name="path"></param>
-        /// <returns></returns>
-        public AppOptions FromFile(string path)
+        /// <returns>AppOptions</returns>
+        public static AppOptions FromFile(string path)
         {
             using (var stream = File.OpenRead(path))
             {
@@ -65,8 +64,8 @@ namespace Segmage
         /// 
         /// </summary>
         /// <param name="path"></param>
-        /// <returns></returns>
-        public async Task<AppOptions> FromFileAsync(string path)
+        /// <returns>AppOptions</returns>
+        public static async Task<AppOptions> FromFileAsync(string path)
         {
             using (var stream = File.OpenRead(path))
             {
@@ -76,7 +75,7 @@ namespace Segmage
 
         #region Private Members
 
-        private async Task<AppOptions> FromStreamAsync(Stream stream)
+        private static async Task<AppOptions> FromStreamAsync(Stream stream)
         {
             try
             {
@@ -95,7 +94,7 @@ namespace Segmage
             }
         }
        
-        private AppOptions FromStream(Stream stream)
+        private static AppOptions FromStream(Stream stream)
         {
             try
             {

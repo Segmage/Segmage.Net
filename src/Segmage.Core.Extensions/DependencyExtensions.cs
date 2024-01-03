@@ -10,11 +10,8 @@ namespace Segmage.Core.Extensions
         {
             var o = new AppOptions();
             options(o);
-            
             if (services == null||options==null) throw new ArgumentNullException(nameof(services));
-            
-            SegmageApp.CreateInstance(o,name);
-            
+            services.AddSegmage(name,o);
             return services;
         }
         

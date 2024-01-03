@@ -1,0 +1,42 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+        <LangVersion>10</LangVersion>
+        <Description>Segmage Event &amp; Data Sender Asp.Net Core Dependency Extension</Description>
+        <VersionPrefix>1.0.0.1</VersionPrefix>
+        <Authors>Segmage</Authors>
+        <TargetFrameworks Condition=" '$(OS)' == 'Windows_NT'">net462;net471</TargetFrameworks>
+        <TargetFrameworks>net6.0;net5.0;net7.0</TargetFrameworks>
+        <GenerateDocumentationFile>true</GenerateDocumentationFile>
+        <PackageTags>segmage;cdp;eventsender;segmentation</PackageTags>
+        <PackageIcon>icon.jpg</PackageIcon>
+        <PackageProjectUrl>https://www.segmage.com?utm_source=sdk&amp;utm_medium=nugetorg</PackageProjectUrl>
+        <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
+        <GenerateAssemblyVersionAttribute>false</GenerateAssemblyVersionAttribute>
+        <TreatSpecificWarningsAsErrors />
+        <IsTrimmable>true</IsTrimmable>
+        <NoWarn>$(NoWarn);CS1437;CS1570</NoWarn>
+        <PolySharpIncludeRuntimeSupportedAttributes>true</PolySharpIncludeRuntimeSupportedAttributes>
+        <PublishRepositoryUrl>true</PublishRepositoryUrl>
+        <EmbedUntrackedSources>true</EmbedUntrackedSources>
+        <IncludeSymbols>true</IncludeSymbols>
+        <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+        <PackageReadmeFile>README.md</PackageReadmeFile>
+        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+        <Title>Segmage.Net Asp.Net Core Dependency Extension</Title>
+        <Version>1.0.0.4</Version>
+        <RepositoryType>git</RepositoryType>
+        <Copyright>Segmage 2023</Copyright>
+        <RepositoryUrl>https://github.com/Segmage/Segmage.Net.git</RepositoryUrl>
+    </PropertyGroup>
+    <ItemGroup>
+        <None Include="../../assets/icon.jpg" Pack="true" Visible="false" PackagePath="/" />
+        <None Include="../../assets/Segmage.Core.Extensions/README.md" Pack="true" Visible="false" PackagePath="/" />
+    </ItemGroup>
+    <ItemGroup>
+        <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="2.2.0" />
+        <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    </ItemGroup>
+</Project>
