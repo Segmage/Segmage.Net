@@ -4,16 +4,16 @@
 
 Segmage.AspNetCore.Extensions integrate Asp.NET Core applications. It is easy to set, has a clean API, and runs on all recent Asp.NET  Core platforms.
 ## Installation
-The Segmage.AspNetCore.Extensions is available on Nuget as `Segmage.AspNetCore.Extension`. Use the
+The Segmage.AspNetCore.Extensions is available on Nuget as `Segmage.AspNetCore.Extensions`. Use the
 following command to install it with the Nuget package manager:
 ```
-$ Install-Package Segmage.AspNetCore.Extension -Version $VERSION
+$ Install-Package Segmage.AspNetCore.Extensions -Version $VERSION
 ```
 
 Or use the `dotnet` command-line utility as follows:
 
 ```
-$ dotnet add package Segmage.AspNetCore.Extension --version $VERSION
+$ dotnet add package Segmage.AspNetCore.Extensions --version $VERSION
 ```
 
 ## License and Terms

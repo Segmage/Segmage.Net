@@ -34,6 +34,21 @@ Or use the `dotnet` command-line utility as follows:
 $ dotnet add package Segmage.Core.Extension --version $VERSION
 ```
 
+# Segmage.AspNetCore.Extensions [![NuGet Version](http://img.shields.io/nuget/v/Segmage.Core.Extensions.svg?style=flat)](https://www.nuget.org/packages/Segmage.AspNetCore.Extensions/) [![NuGet Downloads](https://img.shields.io/nuget/dt/Segmage.AspNetCore.Extensions.svg)](https://www.nuget.org/packages/Segmage.Core.Extensions/)
+
+Segmage.AspNetCore.Extensions integrate Asp.NET Core applications. It is easy to set, has a clean API, and runs on all recent Asp.NET  Core platforms.
+## Installation
+The Segmage.AspNetCore.Extensions is available on Nuget as `Segmage.AspNetCore.Extensions`. Use the
+following command to install it with the Nuget package manager:
+```
+$ Install-Package Segmage.AspNetCore.Extensions -Version $VERSION
+```
+
+Or use the `dotnet` command-line utility as follows:
+
+```
+$ dotnet add package Segmage.AspNetCore.Extensions --version $VERSION
+```
 ## License and Terms
 
 Segmage.NET SDK is licensed under the
