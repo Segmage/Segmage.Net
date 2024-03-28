@@ -12,7 +12,7 @@ builder.Services.AddSegmage("TEST_INSTANCE-1", async options =>
 
 var app = builder.Build();
 
-
+//test
 app.MapGet("/", async ( ) =>
 {
     await SegmageApp.DefaultInstance.EventSender.SendLoginEventAsync("loginEventUniqName",new LoginEvent
