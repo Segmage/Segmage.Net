@@ -14,6 +14,7 @@ namespace Segmage
         public const string REMOVE_FROM_BASKET_EVENT = "{0}/app/{1}/RemoveFromBasket";
         public const string BATCH_DATA_EVENT = "{0}/dt/integration/{1}/SendBatchData";
         public const string UPLOAD_BATCH_DATA_EVENT = "{0}/dt/integration/{1}/UploadBatchData";
-
-    }
+		public const string UPLOAD_SINGLE_DATA = "{0}/upload/integration/uploadsingle";
+		public const string UPLOAD_BATCH_DATA = "{0}/upload/integration/uploadbatch";
+	}
 }
