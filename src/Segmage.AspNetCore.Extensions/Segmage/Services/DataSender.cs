@@ -7,7 +7,7 @@ using Segmage.Models;
 
 namespace Segmage.Services
 {
-	public class BatchDataSender : SenderBase
+	public class DataSender : SenderBase
 	{
 		private readonly AppOptions _options;
 
@@ -15,7 +15,7 @@ namespace Segmage.Services
 		/// 
 		/// </summary>
 		/// <param name="options"></param>
-		public BatchDataSender(SegmageApp app) : base(app.Options)
+		public DataSender(SegmageApp app) : base(app.Options)
 		{
 			_options = app.Options;
 		}
@@ -28,9 +28,9 @@ namespace Segmage.Services
 		/// <param name="entity"></param>
 		/// <param name="cancellationToken"></param>
 		/// <returns></returns>
-		public async Task<ServiceResult> UploadCustomer360<TEntity>(TEntity entity, CancellationToken cancellationToken = default) where TEntity : Customer360
+		public async Task<ServiceResult> SendCustomer360<TEntity>(TEntity entity, CancellationToken cancellationToken = default) where TEntity : Customer360
 		{
-			return await UploadSingle(entity, ModuleTypeEnum.ACTIVITY, cancellationToken);
+			return await SendSingle(entity, ModuleTypeEnum.ACTIVITY, cancellationToken);
 		}
 
 
@@ -44,7 +44,7 @@ namespace Segmage.Services
 		/// <returns></returns>
 		public async Task<ServiceResult> BatchUploadCustomer360<TEntity>(List<TEntity> entities, CancellationToken cancellationToken = default) where TEntity : Customer360
 		{
-			return await UploadBatch(entities, ModuleTypeEnum.ACTIVITY, cancellationToken);
+			return await SendBatch(entities, ModuleTypeEnum.ACTIVITY, cancellationToken);
 		}
 
 		/// <summary>
@@ -54,9 +54,9 @@ namespace Segmage.Services
 		/// <param name="entity"></param>
 		/// <param name="cancellationToken"></param>
 		/// <returns></returns>
-		public async Task<ServiceResult> UploadProduct360<TEntity>(TEntity entity, CancellationToken cancellationToken = default) where TEntity : Product360
+		public async Task<ServiceResult> SendProduct360<TEntity>(TEntity entity, CancellationToken cancellationToken = default) where TEntity : Product360
 		{
-			return await UploadSingle(entity, ModuleTypeEnum.PRODUCT360, cancellationToken);
+			return await SendSingle(entity, ModuleTypeEnum.PRODUCT360, cancellationToken);
 		}
 
 
@@ -69,7 +69,7 @@ namespace Segmage.Services
 		/// <returns></returns>
 		public async Task<ServiceResult> BatchUploadProduct360<TEntity>(List<TEntity> entities, CancellationToken cancellationToken = default) where TEntity : Product360
 		{
-			return await UploadBatch(entities, ModuleTypeEnum.PRODUCT360, cancellationToken);
+			return await SendBatch(entities, ModuleTypeEnum.PRODUCT360, cancellationToken);
 		}
 
 		/// <summary>
@@ -79,9 +79,9 @@ namespace Segmage.Services
 		/// <param name="entity"></param>
 		/// <param name="cancellationToken"></param>
 		/// <returns></returns>
-		public async Task<ServiceResult> UploadEntity<TEntity>(TEntity entity, CancellationToken cancellationToken = default)
+		public async Task<ServiceResult> SendEntity<TEntity>(TEntity entity, CancellationToken cancellationToken = default)
 		{
-			return await UploadSingle(entity, ModuleTypeEnum.OTHER, cancellationToken);
+			return await SendSingle(entity, ModuleTypeEnum.OTHER, cancellationToken);
 		}
 
 
@@ -92,9 +92,9 @@ namespace Segmage.Services
 		/// <param name="entity"></param>
 		/// <param name="cancellationToken"></param>
 		/// <returns></returns>
-		public async Task<ServiceResult> UploadActivity<TEntity>(TEntity entity, CancellationToken cancellationToken = default) where TEntity : Activity
+		public async Task<ServiceResult> SendActivity<TEntity>(TEntity entity, CancellationToken cancellationToken = default) where TEntity : Activity
 		{
-			return await UploadSingle(entity, ModuleTypeEnum.ACTIVITY, cancellationToken);
+			return await SendSingle(entity, ModuleTypeEnum.ACTIVITY, cancellationToken);
 		}
 
 
@@ -108,7 +108,7 @@ namespace Segmage.Services
 		/// <returns></returns>
 		public async Task<ServiceResult> BatchUploadActivity<TEntity>(List<TEntity> entities, CancellationToken cancellationToken = default) where TEntity : Activity
 		{
-			return await UploadBatch(entities, ModuleTypeEnum.ACTIVITY, cancellationToken);
+			return await SendBatch(entities, ModuleTypeEnum.ACTIVITY, cancellationToken);
 		}
 
 
@@ -121,11 +121,11 @@ namespace Segmage.Services
 		/// <returns></returns>
 		public async Task<ServiceResult> BatchUploadEntity<TEntity>(List<TEntity> entities, CancellationToken cancellationToken = default)
 		{
-			return await UploadBatch(entities, ModuleTypeEnum.OTHER, cancellationToken);
+			return await SendBatch(entities, ModuleTypeEnum.OTHER, cancellationToken);
 		}
 
 
-		private async Task<ServiceResult> UploadSingle<TEntity>(TEntity entity, ModuleTypeEnum moduleType, CancellationToken cancellationToken)
+		private async Task<ServiceResult> SendSingle<TEntity>(TEntity entity, ModuleTypeEnum moduleType, CancellationToken cancellationToken)
 		{
 			string typeName = typeof(TEntity).Name;
 			UploadContext uploader = new UploadContext()
@@ -137,7 +137,7 @@ namespace Segmage.Services
 			return await PostRequestAsync(ApiUriConsts.UPLOAD_SINGLE_DATA, uploader, cancellationToken);
 		}
 
-		private async Task<ServiceResult> UploadBatch<TEntity>(List<TEntity> entities, ModuleTypeEnum moduleType, CancellationToken cancellationToken)
+		private async Task<ServiceResult> SendBatch<TEntity>(List<TEntity> entities, ModuleTypeEnum moduleType, CancellationToken cancellationToken)
 		{
 			string typeName = typeof(TEntity).Name;
 			UploadContext uploader = new UploadContext()

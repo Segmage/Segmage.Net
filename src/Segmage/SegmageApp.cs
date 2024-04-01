@@ -25,7 +25,7 @@ namespace Segmage
             Options = options;
             Name = name;
             EventSender = new EventSender(this);
-            BatchDataSender = new BatchDataSender(this);
+            BatchDataSender = new DataSender(this);
         }
 
         /// <summary>
@@ -67,7 +67,7 @@ namespace Segmage
         /// <summary>
         /// 
         /// </summary>
-        public BatchDataSender BatchDataSender { get; set; }
+        public DataSender BatchDataSender { get; set; }
 
     }
 }
