@@ -29,15 +29,6 @@ namespace Segmage.Services
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="dataTableName"></param>
-        /// <param name="jsonData"></param>
-        /// <param name="cancellationToken"></param>
-        /// <returns></returns>
-        public async Task<ServiceResult> SendDataAsync(string dataTableName, DataTable jsonData,CancellationToken cancellationToken=default)=> await PostRequestAsync(ApiUriConsts.CUSTOM_EVENT, jsonData,cancellationToken);
-
-        /// <summary>
-        /// 
-        /// </summary>
         /// <param name="event"></param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>

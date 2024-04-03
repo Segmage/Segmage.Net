@@ -180,7 +180,7 @@ namespace Segmage.Services
 		/// <returns></returns>
 		public async Task<ServiceResult> SendPriceOffer<TEntity>(TEntity entity, CancellationToken cancellationToken = default) where TEntity : Offer
 		{
-			return await SendSingle(entity, ModuleTypeEnum.PRICEOFFER, cancellationToken, "PriveOffer");
+			return await SendSingle(entity, ModuleTypeEnum.PRICEOFFER, cancellationToken, "PriceOffer");
 		}
 
 		/// <summary>
@@ -202,7 +202,7 @@ namespace Segmage.Services
 		/// <param name="entity"></param>
 		/// <param name="cancellationToken"></param>
 		/// <returns></returns>
-		public async Task<ServiceResult> SendProductReturn<TEntity>(TEntity entity, CancellationToken cancellationToken = default) where TEntity : Return
+		public async Task<ServiceResult> SendProductReturn<TEntity>(TEntity entity, CancellationToken cancellationToken = default) where TEntity : ProductReturn
 		{
 			return await SendSingle(entity, ModuleTypeEnum.RETURN, cancellationToken, "ProductReturn");
 		}
@@ -214,7 +214,7 @@ namespace Segmage.Services
 		/// <param name="batch"></param>
 		/// <param name="cancellationToken"></param>
 		/// <returns></returns>
-		public async Task<ServiceResult> BatchSendProductReturn<TEntity>(List<TEntity> entities, CancellationToken cancellationToken = default) where TEntity : Return
+		public async Task<ServiceResult> BatchSendProductReturn<TEntity>(List<TEntity> entities, CancellationToken cancellationToken = default) where TEntity : ProductReturn
 		{
 			return await SendBatch(entities, ModuleTypeEnum.RETURN, cancellationToken, "ProductReturn");
 		}

@@ -1,5 +1,4 @@
 using Segmage.AspNetCore.Extensions;
-using Segmage.AspNetCore.Extensions.Segmage.Services;
 using Segmage.Services;
 
 namespace Segmage
