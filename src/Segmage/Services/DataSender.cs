@@ -30,7 +30,7 @@ namespace Segmage.Services
 		/// <returns></returns>
 		public async Task<ServiceResult> SendCustomer360<TEntity>(TEntity entity, CancellationToken cancellationToken = default) where TEntity : Customer360
 		{
-			return await SendSingle(entity, ModuleTypeEnum.ACTIVITY, cancellationToken);
+			return await SendSingle(entity, ModuleTypeEnum.ACTIVITY, cancellationToken, "Customer360");
 		}
 
 
@@ -42,9 +42,9 @@ namespace Segmage.Services
 		/// <param name="batch"></param>
 		/// <param name="cancellationToken"></param>
 		/// <returns></returns>
-		public async Task<ServiceResult> BatchUploadCustomer360<TEntity>(List<TEntity> entities, CancellationToken cancellationToken = default) where TEntity : Customer360
+		public async Task<ServiceResult> BatchSendCustomer360<TEntity>(List<TEntity> entities, CancellationToken cancellationToken = default) where TEntity : Customer360
 		{
-			return await SendBatch(entities, ModuleTypeEnum.ACTIVITY, cancellationToken);
+			return await SendBatch(entities, ModuleTypeEnum.ACTIVITY, cancellationToken, "Customer360");
 		}
 
 		/// <summary>
@@ -56,7 +56,7 @@ namespace Segmage.Services
 		/// <returns></returns>
 		public async Task<ServiceResult> SendProduct360<TEntity>(TEntity entity, CancellationToken cancellationToken = default) where TEntity : Product360
 		{
-			return await SendSingle(entity, ModuleTypeEnum.PRODUCT360, cancellationToken);
+			return await SendSingle(entity, ModuleTypeEnum.PRODUCT360, cancellationToken, "Product360");
 		}
 
 
@@ -67,9 +67,9 @@ namespace Segmage.Services
 		/// <param name="batch"></param>
 		/// <param name="cancellationToken"></param>
 		/// <returns></returns>
-		public async Task<ServiceResult> BatchUploadProduct360<TEntity>(List<TEntity> entities, CancellationToken cancellationToken = default) where TEntity : Product360
+		public async Task<ServiceResult> BatchSendProduct360<TEntity>(List<TEntity> entities, CancellationToken cancellationToken = default) where TEntity : Product360
 		{
-			return await SendBatch(entities, ModuleTypeEnum.PRODUCT360, cancellationToken);
+			return await SendBatch(entities, ModuleTypeEnum.PRODUCT360, cancellationToken, "Product360");
 		}
 
 		/// <summary>
@@ -82,6 +82,18 @@ namespace Segmage.Services
 		public async Task<ServiceResult> SendEntity<TEntity>(TEntity entity, CancellationToken cancellationToken = default)
 		{
 			return await SendSingle(entity, ModuleTypeEnum.OTHER, cancellationToken);
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <typeparam name="TEntity"></typeparam>
+		/// <param name="batch"></param>
+		/// <param name="cancellationToken"></param>
+		/// <returns></returns>
+		public async Task<ServiceResult> BatchSendEntity<TEntity>(List<TEntity> entities, CancellationToken cancellationToken = default) where TEntity : Product360
+		{
+			return await SendBatch(entities, ModuleTypeEnum.OTHER, cancellationToken);
 		}
 
 
@@ -106,11 +118,22 @@ namespace Segmage.Services
 		/// <param name="batch"></param>
 		/// <param name="cancellationToken"></param>
 		/// <returns></returns>
-		public async Task<ServiceResult> BatchUploadActivity<TEntity>(List<TEntity> entities, CancellationToken cancellationToken = default) where TEntity : Activity
+		public async Task<ServiceResult> BatchSendActivity<TEntity>(List<TEntity> entities, CancellationToken cancellationToken = default) where TEntity : Activity
 		{
 			return await SendBatch(entities, ModuleTypeEnum.ACTIVITY, cancellationToken);
 		}
 
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <typeparam name="TEntity"></typeparam>
+		/// <param name="entity"></param>
+		/// <param name="cancellationToken"></param>
+		/// <returns></returns>
+		public async Task<ServiceResult> SendOpportunity<TEntity>(TEntity entity, CancellationToken cancellationToken = default) where TEntity : Opportunity
+		{
+			return await SendSingle(entity, ModuleTypeEnum.OPPORTUNITY, cancellationToken, "Opportunity");
+		}
 
 		/// <summary>
 		/// 
@@ -119,30 +142,100 @@ namespace Segmage.Services
 		/// <param name="batch"></param>
 		/// <param name="cancellationToken"></param>
 		/// <returns></returns>
-		public async Task<ServiceResult> BatchUploadEntity<TEntity>(List<TEntity> entities, CancellationToken cancellationToken = default)
+		public async Task<ServiceResult> BatchSendOpportunity<TEntity>(List<TEntity> entities, CancellationToken cancellationToken = default) where TEntity : Opportunity
 		{
-			return await SendBatch(entities, ModuleTypeEnum.OTHER, cancellationToken);
+			return await SendBatch(entities, ModuleTypeEnum.OPPORTUNITY, cancellationToken, "Opportunity");
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <typeparam name="TEntity"></typeparam>
+		/// <param name="entity"></param>
+		/// <param name="cancellationToken"></param>
+		/// <returns></returns>
+		public async Task<ServiceResult> SendSale<TEntity>(TEntity entity, CancellationToken cancellationToken = default) where TEntity : Sale
+		{
+			return await SendSingle(entity, ModuleTypeEnum.SALES, cancellationToken, "Sale");
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <typeparam name="TEntity"></typeparam>
+		/// <param name="batch"></param>
+		/// <param name="cancellationToken"></param>
+		/// <returns></returns>
+		public async Task<ServiceResult> BatchSendSale<TEntity>(List<TEntity> entities, CancellationToken cancellationToken = default) where TEntity : Sale
+		{
+			return await SendBatch(entities, ModuleTypeEnum.SALES, cancellationToken, "Sale");
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <typeparam name="TEntity"></typeparam>
+		/// <param name="entity"></param>
+		/// <param name="cancellationToken"></param>
+		/// <returns></returns>
+		public async Task<ServiceResult> SendPriceOffer<TEntity>(TEntity entity, CancellationToken cancellationToken = default) where TEntity : Offer
+		{
+			return await SendSingle(entity, ModuleTypeEnum.PRICEOFFER, cancellationToken, "PriveOffer");
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <typeparam name="TEntity"></typeparam>
+		/// <param name="batch"></param>
+		/// <param name="cancellationToken"></param>
+		/// <returns></returns>
+		public async Task<ServiceResult> BatchSendPriceOffer<TEntity>(List<TEntity> entities, CancellationToken cancellationToken = default) where TEntity : Offer
+		{
+			return await SendBatch(entities, ModuleTypeEnum.PRICEOFFER, cancellationToken, "PriceOffer");
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <typeparam name="TEntity"></typeparam>
+		/// <param name="entity"></param>
+		/// <param name="cancellationToken"></param>
+		/// <returns></returns>
+		public async Task<ServiceResult> SendProductReturn<TEntity>(TEntity entity, CancellationToken cancellationToken = default) where TEntity : Return
+		{
+			return await SendSingle(entity, ModuleTypeEnum.RETURN, cancellationToken, "ProductReturn");
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <typeparam name="TEntity"></typeparam>
+		/// <param name="batch"></param>
+		/// <param name="cancellationToken"></param>
+		/// <returns></returns>
+		public async Task<ServiceResult> BatchSendProductReturn<TEntity>(List<TEntity> entities, CancellationToken cancellationToken = default) where TEntity : Return
+		{
+			return await SendBatch(entities, ModuleTypeEnum.RETURN, cancellationToken, "ProductReturn");
 		}
 
 
-		private async Task<ServiceResult> SendSingle<TEntity>(TEntity entity, ModuleTypeEnum moduleType, CancellationToken cancellationToken)
+		private async Task<ServiceResult> SendSingle<TEntity>(TEntity entity, ModuleTypeEnum moduleType, CancellationToken cancellationToken, string typeName = null)
 		{
-			string typeName = typeof(TEntity).Name;
 			UploadContext uploader = new UploadContext()
 			{
-				TypeName = typeName,
+				TypeName = typeName == null ? typeof(TEntity).Name : typeName,
 				ModuleType = (int)moduleType,
 				SerializedData = JsonConvert.SerializeObject(entity)
 			};
 			return await PostRequestAsync(ApiUriConsts.UPLOAD_SINGLE_DATA, uploader, cancellationToken);
 		}
 
-		private async Task<ServiceResult> SendBatch<TEntity>(List<TEntity> entities, ModuleTypeEnum moduleType, CancellationToken cancellationToken)
+		private async Task<ServiceResult> SendBatch<TEntity>(List<TEntity> entities, ModuleTypeEnum moduleType, CancellationToken cancellationToken, string typeName = null)
 		{
-			string typeName = typeof(TEntity).Name;
 			UploadContext uploader = new UploadContext()
 			{
-				TypeName = typeName,
+				TypeName = typeName == null ? typeof(TEntity).Name : typeName,
 				ModuleType = (int)moduleType,
 				SerializedData = JsonConvert.SerializeObject(entities)
 			};
