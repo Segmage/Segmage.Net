@@ -26,9 +26,9 @@
         <PackageReadmeFile>README.md</PackageReadmeFile>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
         <Title>Segmage.Net Asp.Net Core Dependency Extension</Title>
-        <Version>1.0.0.4</Version>
+        <Version>1.0.0.6</Version>
         <RepositoryType>git</RepositoryType>
-        <Copyright>Segmage 2023</Copyright>
+        <Copyright>Segmage 2024</Copyright>
         <RepositoryUrl>https://github.com/Segmage/Segmage.Net.git</RepositoryUrl>
     </PropertyGroup>
     <ItemGroup>

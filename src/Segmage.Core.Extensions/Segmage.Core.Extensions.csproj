@@ -25,9 +25,9 @@
         <PackageReadmeFile>README.md</PackageReadmeFile>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
         <Title>Segmage.Net Core Dependency Extension</Title>
-        <Version>1.0.0.4</Version>
+        <Version>1.0.0.6</Version>
         <RepositoryType>git</RepositoryType>
-        <Copyright>Segmage 2023</Copyright>
+        <Copyright>Segmage 2024</Copyright>
         <RepositoryUrl>https://github.com/Segmage/Segmage.Net.git</RepositoryUrl>
     </PropertyGroup>
     <ItemGroup>
@@ -36,6 +36,6 @@
     </ItemGroup>
     <ItemGroup>
       <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="8.0.0" />
-      <PackageReference Include="Segmage" Version="1.0.0.4" />
+      <PackageReference Include="Segmage" Version="1.0.0.6" />
     </ItemGroup>
 </Project>
