@@ -4,11 +4,8 @@ using Segmage.Core.Extensions;
 using Segmage.Models;
 
 var builder = WebApplication.CreateBuilder(args);
-
-builder.Services.AddSegmage("TEST_INSTANCE-1", async options =>
-{
-    options=await AppOptions.FromFileAsync("test-1-conf.json");
-});
+var token=builder.Configuration.GetValue<string>("SegmageAccessToken");
+builder.Services.AddSegmage(token);
 
 var app = builder.Build();
 
@@ -19,5 +16,6 @@ app.MapGet("/", async ( ) =>
     {
          UserId = "LoginUserID",SessionId = "SessionId"
     });
+   
 });
 app.Run();

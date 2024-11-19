@@ -6,7 +6,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Examples", "Examples", "{ED
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Src", "Src", "{D3F64894-6299-444C-9C4C-DD24AD706370}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Segmage.WebApp.Example", "examples\Segmage.WebApp.Example\Segmage.WebApp.Example.csproj", "{D4407C24-A040-4A60-850C-6655C29D13F4}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Segmage.Examples.WebApp", "examples\Segmage.Examples.WebApp\Segmage.Examples.WebApp.csproj", "{D4407C24-A040-4A60-850C-6655C29D13F4}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Segmage.Core.Extensions", "src\Segmage.Core.Extensions\Segmage.Core.Extensions.csproj", "{D621D8D4-39F4-4797-ACFC-BE0358BBC00F}"
 EndProject

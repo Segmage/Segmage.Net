@@ -8,7 +8,7 @@
     }
   },
   "profiles": {
-    "Segmage.Event.WebApp.Test": {
+    "Segmage.Examples.WebApp": {
       "commandName": "Project",
       "dotnetRunMessages": true,
       "launchBrowser": true,

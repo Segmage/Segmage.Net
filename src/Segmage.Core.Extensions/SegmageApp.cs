@@ -1,4 +1,3 @@
-using Segmage.AspNetCore.Extensions;
 using Segmage.Services;
 
 namespace Segmage
@@ -24,8 +23,8 @@ namespace Segmage
         {
             Options = options;
             Name = name;
-            EventSender = new EventSender(this);
-            BatchDataSender = new DataSender(this);
+            EventSender = new EventSender(options);
+            DataSender = new DataSender(options);
         }
 
         /// <summary>
@@ -63,27 +62,11 @@ namespace Segmage
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="session"></param>
-        public async Task SetSession(SgSession session)
-        {
-           await SegmageHttpContext.SetSgSession(session);
-        }
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <returns>SgSession</returns>
-        public async Task<SgSession?> GetSession()
-        {
-            return await SegmageHttpContext.GetSgSession();
-        }
-        /// <summary>
-        /// 
-        /// </summary>
         public EventSender EventSender { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public DataSender BatchDataSender { get; set; }
+        public DataSender DataSender { get; set; }
 
     }
 }

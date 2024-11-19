@@ -9,17 +9,11 @@ namespace Segmage.Services
 {
 	public class DataSender : SenderBase
 	{
-		private readonly AppOptions _options;
-
 		/// <summary>
 		/// 
 		/// </summary>
 		/// <param name="options"></param>
-		public DataSender(SegmageApp app) : base(app.Options)
-		{
-			_options = app.Options;
-		}
-
+		public DataSender(AppOptions options) : base(options) { }
 
 		/// <summary>
 		/// 

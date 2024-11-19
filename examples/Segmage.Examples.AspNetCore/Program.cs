@@ -1,12 +1,14 @@
 using Segmage;
 using Segmage.AspNetCore.Extensions;
+using Segmage.Core.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 builder.Services.AddSession();
-builder.Services.AddSegmage(AppOptions.FromFile("test-conf.json"));
+var token=builder.Configuration.GetValue<string>("SegmageAccessToken");
+builder.Services.AddSegmage(token);
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

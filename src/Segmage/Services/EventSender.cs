@@ -4,17 +4,9 @@ using Segmage.Models;
 
 namespace Segmage.Services
 {
-    public sealed class EventSender:SenderBase
+    public  class EventSender:SenderBase
     {
-        private readonly SegmageApp _segmageApp;
-        private readonly AppOptions _options;
-        private string ToRequestUri(string item) => string.Format(item,"{0}", item);
-
-        public EventSender(SegmageApp segmageApp):base(segmageApp.Options)
-        {
-            _segmageApp = segmageApp;
-            _options = segmageApp.Options;
-        }
+        public EventSender(AppOptions options):base(options) { }
         
         /// <summary>
         /// 
@@ -92,7 +84,13 @@ namespace Segmage.Services
 
         private async Task<ServiceResult> ExecuteAsync(string path, BaseEvent @event, CancellationToken cancellationToken)
         {
+            @event=await BeginExecutionAsync(@event);
             return  await PostRequestAsync(path, @event,cancellationToken);
+        }
+
+        public virtual async Task<BaseEvent> BeginExecutionAsync(BaseEvent @event)
+        {
+            return @event;
         }
     }
 }

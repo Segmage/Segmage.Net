@@ -9,9 +9,9 @@ namespace Segmage.Services
     public abstract class SenderBase
     {
         private readonly AppOptions _options;
-        private string ToRequestUri(string path) => string.Format(path, _options.CollectUrl, "{1}");
+        private string ToRequestUri(string path) => string.Format(path, _options.Credential.CollectUrl, "{1}");
 
-    /// <summary>
+         /// <summary>
         /// 
         /// </summary>
         /// <param name="options"></param>

@@ -1,5 +1,6 @@
-using System.Collections.Generic;
+using Segmage.AspNetCore.Extensions;
 using Segmage.Services;
+using EventSender = Segmage.Services.EventSender;
 
 namespace Segmage
 {
@@ -24,8 +25,8 @@ namespace Segmage
         {
             Options = options;
             Name = name;
-            EventSender = new EventSender(this);
-            BatchDataSender = new DataSender(this);
+            EventSender = new EventSender(options);
+            DataSender = new DataSender(options);
         }
 
         /// <summary>
@@ -67,7 +68,7 @@ namespace Segmage
         /// <summary>
         /// 
         /// </summary>
-        public DataSender BatchDataSender { get; set; }
-
+        public DataSender DataSender { get; set; }
+        
     }
 }
