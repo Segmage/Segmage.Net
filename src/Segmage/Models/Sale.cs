@@ -6,10 +6,12 @@ using System.Threading.Tasks;
 
 namespace Segmage.Models
 {
-	public abstract class Sale : Basket
+	public abstract class Sale<TIdType, TOfferIdType, TOpportunityIdType, TUserIdType> : BaseEvent<TUserIdType>
 	{
-		public string OpportunityId { get; set; }
+		public TIdType Id { get; set; }
 
-		public string OfferId { get; set; }
+		public TOpportunityIdType OpportunityId { get; set; }
+
+		public TOfferIdType OfferId { get; set; }
 	}
 }

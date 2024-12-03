@@ -1,7 +1,7 @@
 namespace Segmage.Models
 {
-    public class SearchEvent:BaseEvent
-    {
-        public string Data { get; set; }
-    }
+	public class SearchEvent<TUserIdType> : BaseEvent<TUserIdType>
+	{
+		public string Data { get; set; }
+	}
 }

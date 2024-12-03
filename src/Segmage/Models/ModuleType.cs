@@ -17,6 +17,9 @@ namespace Segmage.Models
 		ACTIVITE = 6,
 		RETURN = 7,
 		LEADS = 8,
-		OTHER = 9
+		OTHER = 9,
+		SALESITEMS = 20,
+		BASKETITEMS = 21,
+		RETURNITEMS = 22,
 	}
 }

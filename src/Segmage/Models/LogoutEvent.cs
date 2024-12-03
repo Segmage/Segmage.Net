@@ -1,6 +1,8 @@
+using Segmage.Models.Interfaces;
+
 namespace Segmage.Models
 {
-    public class LogoutEvent : BaseEvent
-    {
-    }
+	public class LogoutEvent<TUserIdType> : BaseEvent<TUserIdType>, ILoginEvent
+	{
+	}
 }

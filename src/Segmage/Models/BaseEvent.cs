@@ -1,9 +1,14 @@
 
+using System;
+
 namespace Segmage.Models
 {
-    public abstract class BaseEvent
-    {
-        public string SessionId { get; set; }
-        public string UserId { get; set; }
-    }
+	public abstract class BaseEvent<TUserIdType> : IBaseEvent
+	{
+		public Guid SessionId { get; set; }
+
+		public TUserIdType UserId { get; set; }
+
+		public DateTime? Created { get; set; }
+	}
 }

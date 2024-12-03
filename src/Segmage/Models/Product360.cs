@@ -1,16 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Segmage.Models.Interfaces;
 
 namespace Segmage.Models
 {
-	public abstract class Product360
+	public abstract class Product360<TIdType> : IProduct360
 	{
-		public string Title { get; set; }
+		public TIdType Id { get; set; }
+		public string Text { get; set; }
 		public string ProductCode { get; set; }
-		public string SKUId { get; set; }
+		public string Affiliation { get; set; }
+		public string SKU { get; set; }
 		public string Brand { get; set; }
 		public string Variant { get; set; }
 		public string Category { get; set; }
