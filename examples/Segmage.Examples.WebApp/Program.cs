@@ -14,7 +14,7 @@ app.MapGet("/", async ( ) =>
 {
     await SegmageApp.DefaultInstance.EventSender.SendLoginEventAsync("loginEventUniqName",new LoginEvent
     {
-         UserId = "LoginUserID",SessionId = "SessionId"
+         UserId = "LoginUserID",SessionId = new Guid()
     });
    
 });
