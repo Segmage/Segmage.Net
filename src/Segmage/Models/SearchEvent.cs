@@ -1,6 +1,6 @@
 namespace Segmage.Models
 {
-	public class SearchEvent<TUserIdType> : BaseEvent<TUserIdType>
+	public class SearchEvent : BaseEvent
 	{
 		public string Data { get; set; }
 	}

@@ -1,11 +1,11 @@
-using Segmage.Models.Interfaces;
+
 using System.Collections.Generic;
 
 namespace Segmage.Models
 {
-	public abstract class Basket<TIdType, TUserIdType> : BaseEvent<TUserIdType>, IBasket
+	public abstract class Basket : BaseEvent
 	{
-		public TIdType Id { get; set; }
+		public string Id { get; set; }
 		public decimal? Total { get; set; } = 0;
 		public decimal? TotalDiscount { get; set; } = 0;
 		public decimal? TotalVat { get; set; } = 0;

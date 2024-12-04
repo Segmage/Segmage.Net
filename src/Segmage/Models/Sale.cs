@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace Segmage.Models
 {
-	public abstract class Sale<TIdType, TOfferIdType, TOpportunityIdType, TUserIdType> : BaseEvent<TUserIdType>
+	public abstract class Sale : BaseEvent
 	{
-		public TIdType Id { get; set; }
+		public string Id { get; set; }
 
-		public TOpportunityIdType OpportunityId { get; set; }
+		public string OpportunityId { get; set; }
 
-		public TOfferIdType OfferId { get; set; }
+		public string OfferId { get; set; }
 	}
 }

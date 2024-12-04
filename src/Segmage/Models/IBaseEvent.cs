@@ -6,5 +6,6 @@ namespace Segmage.Models
 	{
 		DateTime? Created { get; set; }
 		Guid SessionId { get; set; }
+		string UserId { get; set; }
 	}
 }

@@ -9,13 +9,12 @@ public class EventSender:Segmage.Services.EventSender
     {
     }
 
-    public override async Task<BaseEvent> BeginExecutionAsync(BaseEvent @event)
+    public override async Task<IBaseEvent> BeginExecutionAsync(IBaseEvent @event)
     {
         var session =await GetSession();
         if (session == null) throw new SessionNullException("Please set Session Id");
-        @event.SessionId = session.Id;
+        @event.SessionId = Guid.Parse(session.Id);
         @event.UserId = session.UserId;
-        @event.SessionId = Guid.NewGuid().ToString();
         return @event;
     }
     

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Segmage.Models
 {
-	public abstract class ActivitySms<TIdType, TUserIdType> : Activity<TIdType, TUserIdType>
+	public abstract class ActivitySms : Activity
 	{
         public string Phone { get; set; }
 

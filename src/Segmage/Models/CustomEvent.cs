@@ -1,8 +1,7 @@
-using Segmage.Models.Interfaces;
 
 namespace Segmage.Models
 {
-	public class CustomEvent<TUserIdType> : BaseEvent<TUserIdType>, ICustomEvent
+	public class CustomEvent : BaseEvent
 	{
 		public string Data { get; set; }
 	}

@@ -1,10 +1,9 @@
-using Segmage.Models.Interfaces;
 
 namespace Segmage.Models
 {
-	public abstract class ProductReturnItem<TIdType, TProductReturnIdType, TProductIdType> : ProductItem<TProductIdType>, IProductReturnItem
+	public abstract class ProductReturnItem : ProductItem
 	{
-		public TIdType Id { get; set; }
-		public TProductReturnIdType ProductReturnId { get; set; }
+		public string Id { get; set; }
+		public string ProductReturnId { get; set; }
 	}
 }

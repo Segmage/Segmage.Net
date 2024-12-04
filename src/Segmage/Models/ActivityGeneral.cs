@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Segmage.Models
 {
-	public abstract class ActivityGeneral<TIdType, TUserIdType> : Activity<TIdType, TUserIdType>
+	public abstract class ActivityGeneral : Activity
 	{
 
 	}

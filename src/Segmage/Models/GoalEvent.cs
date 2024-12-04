@@ -1,8 +1,7 @@
-using Segmage.Models.Interfaces;
 
 namespace Segmage.Models
 {
-	public class GoalEvent<TUserIdType> : BaseEvent<TUserIdType>, IGoalEvent
+	public class GoalEvent : BaseEvent
 	{
 		public decimal? Value { get; set; }
 	}

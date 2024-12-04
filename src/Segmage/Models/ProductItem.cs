@@ -1,13 +1,13 @@
 namespace Segmage.Models
 {
-	public abstract class ProductItem<TProductIdType>
+	public abstract class ProductItem
 	{
 		public string Description { get; set; }
 		public decimal? Amount { get; set; } = 0;
 		public decimal? Quantity { get; set; } = 0;
 		public decimal? Vat { get; set; } = 0;
 		public decimal? Discount { get; set; } = 0;
-		public TProductIdType ProductId { get; set; }
+		public string ProductId { get; set; }
 		public string ProductCode { get; set; }
 		public string Affiliation { get; set; }
 		public string SKU { get; set; }

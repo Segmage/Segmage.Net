@@ -1,17 +1,16 @@
-using Segmage.Models.Interfaces;
 
 namespace Segmage.Models
 {
-	public class RemoveFromBasketEvent<TIdType, TBasketId, TProductIdType, TUserIdType> : BaseEvent<TUserIdType>, IRemoveFromBasketItem
+	public class RemoveFromBasketEvent : BaseEvent
 	{
-		public TIdType Id { get; set; }
-		public TBasketId BasketId { get; set; }
+		public string Id { get; set; }
+		public string BasketId { get; set; }
 		public string Description { get; set; }
 		public decimal? Amount { get; set; } = 0;
 		public decimal? Quantity { get; set; } = 0;
 		public decimal? Vat { get; set; } = 0;
 		public decimal? Discount { get; set; } = 0;
-		public TProductIdType ProductId { get; set; }
+		public string ProductId { get; set; }
 		public string ProductCode { get; set; }
 		public string ProductText { get; set; }
 		public string Affiliation { get; set; }

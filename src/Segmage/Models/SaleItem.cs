@@ -1,8 +1,8 @@
 namespace Segmage.Models
 {
-	public abstract class ProductSaleItem<TIdType, TSaleIdType, TProductIdType> : ProductItem<TProductIdType>
+	public abstract class ProductSaleItem: ProductItem
 	{
-		public TIdType Id { get; set; }
-		public TSaleIdType SaleId { get; set; }
+		public string Id { get; set; }
+		public string SaleId { get; set; }
 	}
 }

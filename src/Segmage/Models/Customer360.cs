@@ -1,5 +1,4 @@
-﻿using Segmage.Models.Interfaces;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -7,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace Segmage.Models
 {
-	public abstract class Customer360<TIdType> : ICustomer360
+	public abstract class Customer360
 	{
-		public TIdType Id { get; set; }
+		public string Id { get; set; }
 		public string FullName { get; set; }
 		public string ProfileUrl { get; set; }
 		public string ProfileImageUrl { get; set; }

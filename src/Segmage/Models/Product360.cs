@@ -1,10 +1,9 @@
-﻿using Segmage.Models.Interfaces;
-
+﻿
 namespace Segmage.Models
 {
-	public abstract class Product360<TIdType> : IProduct360
+	public abstract class Product360
 	{
-		public TIdType Id { get; set; }
+		public string Id { get; set; }
 		public string Text { get; set; }
 		public string ProductCode { get; set; }
 		public string Affiliation { get; set; }
