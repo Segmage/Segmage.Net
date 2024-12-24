@@ -49,7 +49,7 @@ namespace Segmage.Services
 
 		public async Task<ServiceResult> SendOpportunity<TEntity>(TEntity entity, CancellationToken cancellationToken = default(CancellationToken))
 		{
-			return await PostRequestAsync(ApiUriConsts.OPPORTUNITY., new List<TEntity>() { entity }, cancellationToken);
+			return await PostRequestAsync(ApiUriConsts.OPPORTUNITY, new List<TEntity>() { entity }, cancellationToken);
 		}
 		public async Task<ServiceResult> SendBatchOpportunity<TEntity>(List<TEntity> entities, CancellationToken cancellationToken = default(CancellationToken))
 		{
