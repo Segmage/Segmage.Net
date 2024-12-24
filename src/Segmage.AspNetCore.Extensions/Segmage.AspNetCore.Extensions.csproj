@@ -26,7 +26,7 @@
         <PackageReadmeFile>README.md</PackageReadmeFile>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
         <Title>Segmage.Net Asp.Net Core Dependency Extension</Title>
-        <Version>1.0.0.9</Version>
+        <Version>1.0.0.11</Version>
         <RepositoryType>git</RepositoryType>
         <Copyright>Segmage 2024</Copyright>
         <RepositoryUrl>https://github.com/Segmage/Segmage.Net.git</RepositoryUrl>
@@ -38,6 +38,6 @@
     <ItemGroup>
         <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="2.2.0" />
         <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
-        <PackageReference Include="Segmage" Version="1.0.0.9" />
+        <PackageReference Include="Segmage" Version="1.0.0.11" />
     </ItemGroup>
 </Project>

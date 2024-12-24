@@ -94,7 +94,10 @@ namespace Segmage.Services
 			return await PostRequestAsync(path, @event, cancellationToken);
 		}
 
-
+		public async Task<bool> ValidateToken(CancellationToken cancellationToken = default(CancellationToken))
+		{
+			return await base.ValidateToken(cancellationToken);
+		}
 
 		public virtual async Task<IBaseEvent> BeginExecutionAsync(IBaseEvent @event)
 		{

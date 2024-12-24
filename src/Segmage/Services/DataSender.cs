@@ -147,7 +147,10 @@ namespace Segmage.Services
 			return await GetRequestAsync<List<DataTable>>(ApiUriConsts.DATATABLE, cancellationToken);
 		}
 
-
+		public async Task<bool> ValidateToken(CancellationToken cancellationToken = default(CancellationToken))
+		{
+			return await base.ValidateToken(cancellationToken);
+		}
 
 	}
 
