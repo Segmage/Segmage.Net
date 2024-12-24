@@ -83,9 +83,9 @@ namespace Segmage.Services
 		/// <returns></returns>
 		public async Task<ServiceResult> SendCustomEventAsync(string eventUniqName, CustomEvent @event, CancellationToken cancellationToken = default) => await ExecuteAsync(string.Format(ApiUriConsts.CUSTOM_EVENT, "{0}", eventUniqName), @event, cancellationToken);
 
-		public async Task<List<EventDto>> GetEvents(CancellationToken cancellationToken = default(CancellationToken))
+		public async Task<List<Event>> GetEvents(CancellationToken cancellationToken = default(CancellationToken))
 		{
-			return await GetRequestAsync<List<EventDto>>(ApiUriConsts.EVENTS, cancellationToken);
+			return await GetRequestAsync<List<Event>>(ApiUriConsts.EVENTS, cancellationToken);
 		}
 
 		private async Task<ServiceResult> ExecuteAsync(string path, IBaseEvent @event, CancellationToken cancellationToken)
