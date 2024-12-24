@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Segmage.Models
 {
-	public class TableData
+	public class DataTable
 	{
 		public int Id { get; set; }
 		public string ModuleType { get; set; }
