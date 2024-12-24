@@ -108,7 +108,9 @@ namespace Segmage.Services
 					if (response.IsSuccessStatusCode)
 					{
 						var jsonData = await response.Content.ReadAsStringAsync();
-						result = Newtonsoft.Json.JsonConvert.DeserializeObject<T>(jsonData);
+						var jsonObject = Newtonsoft.Json.Linq.JObject.Parse(jsonData);
+						var data = jsonObject["data"];
+						result = data.ToObject<T>();
 					}
 				}
 			}
