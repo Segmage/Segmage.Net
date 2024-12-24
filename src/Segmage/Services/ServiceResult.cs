@@ -10,4 +10,11 @@ namespace Segmage.Services
         public int FailCount { get; set; } = 0;
         public object Data { get; set; }
     }
+
+	public class GetServiceResult<T>
+	{
+		public T Data { get; set; }
+		public bool IsSuccessStatusCode { get; set; }
+		public HttpStatusCode StatusCode { get; set; }
+	}
 }

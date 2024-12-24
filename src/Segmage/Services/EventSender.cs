@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using Segmage.Models;
@@ -82,11 +83,18 @@ namespace Segmage.Services
 		/// <returns></returns>
 		public async Task<ServiceResult> SendCustomEventAsync(string eventUniqName, CustomEvent @event, CancellationToken cancellationToken = default) => await ExecuteAsync(string.Format(ApiUriConsts.CUSTOM_EVENT, "{0}", eventUniqName), @event, cancellationToken);
 
+		public async Task<List<EventDto>> GetEvents(CancellationToken cancellationToken = default(CancellationToken))
+		{
+			return await GetRequestAsync<List<EventDto>>(ApiUriConsts.EVENTS, cancellationToken);
+		}
+
 		private async Task<ServiceResult> ExecuteAsync(string path, IBaseEvent @event, CancellationToken cancellationToken)
 		{
 			@event = await BeginExecutionAsync(@event);
 			return await PostRequestAsync(path, @event, cancellationToken);
 		}
+
+
 
 		public virtual async Task<IBaseEvent> BeginExecutionAsync(IBaseEvent @event)
 		{

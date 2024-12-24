@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Threading;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
@@ -18,217 +19,136 @@ namespace Segmage.Services
 		/// <param name="options">Application options used for configuration.</param>
 		public DataSender(AppOptions options) : base(options) { }
 
-		#region General Sender
-		/// <summary>
-		/// Sends a generic entity (unspecified type) to the server.
-		/// </summary>
-		public async Task<ServiceResult> SendEntity<TEntity>(TEntity entity, CancellationToken cancellationToken = default)
+
+		public async Task<ServiceResult> SendCustomer360<TEntity>(TEntity entity, CancellationToken cancellationToken = default(CancellationToken))
 		{
-			return await SendSingle(entity, ModuleTypeEnum.OTHER, cancellationToken);
+			return await PostRequestAsync(ApiUriConsts.CUSTOMER60, new List<TEntity>() { entity }, cancellationToken);
+		}
+		public async Task<ServiceResult> SendBatchCustomer360<TEntity>(List<TEntity> entities, CancellationToken cancellationToken = default(CancellationToken))
+		{
+			return await PostRequestAsync(ApiUriConsts.CUSTOMER60, entities, cancellationToken);
 		}
 
-		/// <summary>
-		/// Sends a batch of generic entities to the server.
-		/// </summary>
-		public async Task<ServiceResult> BatchSendEntity<TEntity>(List<TEntity> entities, CancellationToken cancellationToken = default)
+		public async Task<ServiceResult> SendProduct<TEntity>(TEntity entity, CancellationToken cancellationToken = default(CancellationToken))
 		{
-			return await SendBatch(entities, ModuleTypeEnum.OTHER, cancellationToken);
+			return await PostRequestAsync(ApiUriConsts.PRODUCT360, new List<TEntity>() { entity }, cancellationToken);
 		}
-		#endregion
-
-		#region Customer360
-		/// <summary>
-		/// Sends a single Customer360 entity to the server.
-		/// </summary>
-		/// <typeparam name="TEntity">The type of the entity to send.</typeparam>
-		/// <param name="entity">The entity to be sent.</param>
-		/// <param name="cancellationToken">Token to cancel the operation.</param>
-		/// <returns>Result of the operation.</returns>
-		public async Task<ServiceResult> SendCustomer360<TEntity>(TEntity entity, CancellationToken cancellationToken = default) where TEntity : Customer360
+		public async Task<ServiceResult> SendBatchProduct<TEntity>(List<TEntity> entities, CancellationToken cancellationToken = default(CancellationToken))
 		{
-			return await SendSingle(entity, ModuleTypeEnum.ACTIVITY, cancellationToken, "Customer360");
+			return await PostRequestAsync(ApiUriConsts.PRODUCT360, entities, cancellationToken);
 		}
 
-		/// <summary>
-		/// Sends a batch of Customer360 entities to the server.
-		/// </summary>
-		/// <typeparam name="TEntity">The type of the entities to send.</typeparam>
-		/// <param name="entities">The list of entities to send.</param>
-		/// <param name="cancellationToken">Token to cancel the operation.</param>
-		/// <returns>Result of the operation.</returns>
-		public async Task<ServiceResult> BatchSendCustomer360<TEntity>(List<TEntity> entities, CancellationToken cancellationToken = default) where TEntity : Customer360
+		public async Task<ServiceResult> SenBasketd<TEntity>(TEntity entity, CancellationToken cancellationToken = default(CancellationToken))
 		{
-			return await SendBatch(entities, ModuleTypeEnum.ACTIVITY, cancellationToken, "Customer360");
+			return await PostRequestAsync(ApiUriConsts.BASKET, new List<TEntity>() { entity }, cancellationToken);
 		}
-		#endregion
-
-		#region Product
-		/// <summary>
-		/// Sends a single Product360 entity to the server.
-		/// </summary>
-		public async Task<ServiceResult> SendProduct360<TEntity>(TEntity entity, CancellationToken cancellationToken = default) where TEntity : Product360
+		public async Task<ServiceResult> SendBatchBasket<TEntity>(List<TEntity> entities, CancellationToken cancellationToken = default(CancellationToken))
 		{
-			return await SendSingle(entity, ModuleTypeEnum.PRODUCT360, cancellationToken, "Product360");
+			return await PostRequestAsync(ApiUriConsts.BASKET, entities, cancellationToken);
 		}
 
-		/// <summary>
-		/// Sends a batch of Product360 entities to the server.
-		/// </summary>
-		public async Task<ServiceResult> BatchSendProduct360<TEntity>(List<TEntity> entities, CancellationToken cancellationToken = default) where TEntity : Product360
+		public async Task<ServiceResult> SendOpportunity<TEntity>(TEntity entity, CancellationToken cancellationToken = default(CancellationToken))
 		{
-			return await SendBatch(entities, ModuleTypeEnum.PRODUCT360, cancellationToken, "Product360");
+			return await PostRequestAsync(ApiUriConsts.OPPORTUNITY., new List<TEntity>() { entity }, cancellationToken);
 		}
-		#endregion
-
-		#region Activity
-
-		/// <summary>
-		/// Sends a single Activity entity to the server.
-		/// </summary>
-		public async Task<ServiceResult> SendActivity<TEntity>(TEntity entity, CancellationToken cancellationToken = default) where TEntity : Activity
+		public async Task<ServiceResult> SendBatchOpportunity<TEntity>(List<TEntity> entities, CancellationToken cancellationToken = default(CancellationToken))
 		{
-			return await SendSingle(entity, ModuleTypeEnum.ACTIVITY, cancellationToken);
+			return await PostRequestAsync(ApiUriConsts.OPPORTUNITY, entities, cancellationToken);
 		}
 
-		/// <summary>
-		/// Sends a batch of Activity entities to the server.
-		/// </summary>
-		public async Task<ServiceResult> BatchSendActivity<TEntity>(List<TEntity> entities, CancellationToken cancellationToken = default) where TEntity : Activity
+		public async Task<ServiceResult> SendSale<TEntity>(TEntity entity, CancellationToken cancellationToken = default(CancellationToken))
 		{
-			return await SendBatch(entities, ModuleTypeEnum.ACTIVITY, cancellationToken);
+			return await PostRequestAsync(ApiUriConsts.SALE, new List<TEntity>() { entity }, cancellationToken);
 		}
-		#endregion
-
-		#region Opportunity
-		/// <summary>
-		/// Sends a single Opportunity entity to the server.
-		/// </summary>
-		public async Task<ServiceResult> SendOpportunity<TEntity>(TEntity entity, CancellationToken cancellationToken = default) where TEntity : Opportunity
+		public async Task<ServiceResult> SendBatchSale<TEntity>(List<TEntity> entities, CancellationToken cancellationToken = default(CancellationToken))
 		{
-			return await SendSingle(entity, ModuleTypeEnum.OPPORTUNITY, cancellationToken, "Opportunity");
+			return await PostRequestAsync(ApiUriConsts.SALE, entities, cancellationToken);
 		}
 
-		/// <summary>
-		/// Sends a batch of Opportunity entities to the server.
-		/// </summary>
-		public async Task<ServiceResult> BatchSendOpportunity<TEntity>(List<TEntity> entities, CancellationToken cancellationToken = default) where TEntity : Opportunity
+		public async Task<ServiceResult> SendLead<TEntity>(TEntity entity, CancellationToken cancellationToken = default(CancellationToken))
 		{
-			return await SendBatch(entities, ModuleTypeEnum.OPPORTUNITY, cancellationToken, "Opportunity");
+			return await PostRequestAsync(ApiUriConsts.LEAD, new List<TEntity>() { entity }, cancellationToken);
 		}
-		#endregion
-
-		#region Sales
-		/// <summary>
-		/// Sends a single Sale entity to the server.
-		/// </summary>
-		public async Task<ServiceResult> SendSale<TEntity>(TEntity entity, CancellationToken cancellationToken = default) where TEntity : Sale
+		public async Task<ServiceResult> SendBatchLead<TEntity>(List<TEntity> entities, CancellationToken cancellationToken = default(CancellationToken))
 		{
-			return await SendSingle(entity, ModuleTypeEnum.SALES, cancellationToken);
+			return await PostRequestAsync(ApiUriConsts.LEAD, entities, cancellationToken);
 		}
 
-		/// <summary>
-		/// Sends a batch of Sale entities to the server.
-		/// </summary>
-		public async Task<ServiceResult> BatchSendSale<TEntity>(List<TEntity> entities, CancellationToken cancellationToken = default) where TEntity : Sale
+		public async Task<ServiceResult> SendReturn<TEntity>(TEntity entity, CancellationToken cancellationToken = default(CancellationToken))
 		{
-			return await SendBatch(entities, ModuleTypeEnum.SALES, cancellationToken);
+			return await PostRequestAsync(ApiUriConsts.RETURN, new List<TEntity>() { entity }, cancellationToken);
+		}
+		public async Task<ServiceResult> SendBatchReturn<TEntity>(List<TEntity> entities, CancellationToken cancellationToken = default(CancellationToken))
+		{
+			return await PostRequestAsync(ApiUriConsts.RETURN, entities, cancellationToken);
 		}
 
-		/// <summary>
-		/// Sends a single SaleItem entity to the server.
-		/// </summary>
-		public async Task<ServiceResult> SendSaleItem<TEntity>(TEntity entity, CancellationToken cancellationToken = default) where TEntity : ProductSaleItem
+		public async Task<ServiceResult> SendActivityAppointment<TEntity>(TEntity entity, CancellationToken cancellationToken = default(CancellationToken))
 		{
-			return await SendSingle(entity, ModuleTypeEnum.SALESITEMS, cancellationToken);
+			return await PostRequestAsync(ApiUriConsts.ACTIVITYAPPOINTMENT, new List<TEntity>() { entity }, cancellationToken);
+		}
+		public async Task<ServiceResult> SendBatch<TEntity>(List<TEntity> entities, CancellationToken cancellationToken = default(CancellationToken))
+		{
+			return await PostRequestAsync(ApiUriConsts.ACTIVITYAPPOINTMENT, entities, cancellationToken);
 		}
 
-		/// <summary>
-		/// Sends a batch of SaleItem entities to the server.
-		/// </summary>
-		public async Task<ServiceResult> BatchSendSaleItem<TEntity>(List<TEntity> entities, CancellationToken cancellationToken = default) where TEntity : Sale	{
-			return await SendBatch(entities, ModuleTypeEnum.SALESITEMS, cancellationToken);
-		}
-		#endregion
-
-		#region PriceOffer
-		/// <summary>
-		/// Sends a single PriceOffer entity to the server.
-		/// </summary>
-		public async Task<ServiceResult> SendPriceOffer<TEntity>(TEntity entity, CancellationToken cancellationToken = default) where TEntity : Offer
+		public async Task<ServiceResult> SendActivityMeeting<TEntity>(TEntity entity, CancellationToken cancellationToken = default(CancellationToken))
 		{
-			return await SendSingle(entity, ModuleTypeEnum.PRICEOFFER, cancellationToken, "PriceOffer");
+			return await PostRequestAsync(ApiUriConsts.ACTIVITYMEETING, new List<TEntity>() { entity }, cancellationToken);
+		}
+		public async Task<ServiceResult> SendBatchActivityMeeting<TEntity>(List<TEntity> entities, CancellationToken cancellationToken = default(CancellationToken))
+		{
+			return await PostRequestAsync(ApiUriConsts.ACTIVITYMEETING, entities, cancellationToken);
 		}
 
-		/// <summary>
-		/// Sends a batch of PriceOffer entities to the server.
-		/// </summary>
-		public async Task<ServiceResult> BatchSendPriceOffer<TEntity>(List<TEntity> entities, CancellationToken cancellationToken = default) where TEntity : Offer
+		public async Task<ServiceResult> SendActivityPhone<TEntity>(TEntity entity, CancellationToken cancellationToken = default(CancellationToken))
 		{
-			return await SendBatch(entities, ModuleTypeEnum.PRICEOFFER, cancellationToken, "PriceOffer");
+			return await PostRequestAsync(ApiUriConsts.ACTIVITYPHONE, new List<TEntity>() { entity }, cancellationToken);
 		}
-		#endregion
-
-		#region ProductReturn
-		/// <summary>
-		/// Sends a single ProductReturn entity to the server.
-		/// </summary>
-		public async Task<ServiceResult> SendProductReturn<TEntity>(TEntity entity, CancellationToken cancellationToken = default) where TEntity : ProductReturn
+		public async Task<ServiceResult> SendBatchActivityPhone<TEntity>(List<TEntity> entities, CancellationToken cancellationToken = default(CancellationToken))
 		{
-			return await SendSingle(entity, ModuleTypeEnum.RETURN, cancellationToken);
+			return await PostRequestAsync(ApiUriConsts.ACTIVITYPHONE, entities, cancellationToken);
 		}
 
-		/// <summary>
-		/// Sends a batch of ProductReturn entities to the server.
-		/// </summary>
-		public async Task<ServiceResult> BatchSendProductReturn<TEntity>(List<TEntity> entities, CancellationToken cancellationToken = default) where TEntity : ProductReturn
+		public async Task<ServiceResult> SendActivitySupport<TEntity>(TEntity entity, CancellationToken cancellationToken = default(CancellationToken))
 		{
-			return await SendBatch(entities, ModuleTypeEnum.RETURN, cancellationToken);
+			return await PostRequestAsync(ApiUriConsts.ACTIVITYSUPPORT, new List<TEntity>() { entity }, cancellationToken);
+		}
+		public async Task<ServiceResult> SendBatchActivitySupport<TEntity>(List<TEntity> entities, CancellationToken cancellationToken = default(CancellationToken))
+		{
+			return await PostRequestAsync(ApiUriConsts.ACTIVITYSUPPORT, entities, cancellationToken);
 		}
 
-		/// <summary>
-		/// Sends a single ProductReturnItem entity to the server.
-		/// </summary>
-		public async Task<ServiceResult> SendProductReturnItem<TEntity>(TEntity entity, CancellationToken cancellationToken = default) where TEntity : ProductReturnItem
-		{
-			return await SendSingle(entity, ModuleTypeEnum.RETURNITEMS, cancellationToken);
-		}
 
-		/// <summary>
-		/// Sends a batch of ProductReturnItem entities to the server.
-		/// </summary>
-		public async Task<ServiceResult> BatchSendProductReturnItem<TEntity>(List<TEntity> entities, CancellationToken cancellationToken = default) where TEntity : ProductReturnItem
-		{
-			return await SendBatch(entities, ModuleTypeEnum.RETURNITEMS, cancellationToken);
-		}
-		#endregion
 
-		/// <summary>
-		/// Helper method for sending a single entity.
-		/// </summary>
-		private async Task<ServiceResult> SendSingle<TEntity>(TEntity entity, ModuleTypeEnum moduleType, CancellationToken cancellationToken, string typeName = null)
+		public async Task<ServiceResult> SendOther<TEntity>(string moduleName, TEntity entity, CancellationToken cancellationToken = default(CancellationToken))
 		{
-			UploadContext uploader = new UploadContext()
+			UploadContext uploadContext = new UploadContext()
 			{
-				TypeName = typeName ?? typeof(TEntity).Name,
-				ModuleType = (int)moduleType,
-				SerializedData = JsonConvert.SerializeObject(entity)
+				ModuleType = (int)ModuleTypeEnum.OTHER,
+				TypeName = moduleName,
+				SerializedData = JsonConvert.SerializeObject(new List<TEntity>() { entity })
 			};
-			return await PostRequestAsync(ApiUriConsts.UPLOAD_SINGLE_DATA, uploader, cancellationToken);
+			return await PostRequestAsync(ApiUriConsts.OTHER, uploadContext, cancellationToken);
 		}
-
-		/// <summary>
-		/// Helper method for sending a batch of entities.
-		/// </summary>
-		private async Task<ServiceResult> SendBatch<TEntity>(List<TEntity> entities, ModuleTypeEnum moduleType, CancellationToken cancellationToken, string typeName = null)
+		public async Task<ServiceResult> SendBatchOther<TEntity>(string moduleName, List<TEntity> entities, CancellationToken cancellationToken = default(CancellationToken))
 		{
-			UploadContext uploader = new UploadContext()
+			UploadContext uploadContext = new UploadContext()
 			{
-				TypeName = typeName ?? typeof(TEntity).Name,
-				ModuleType = (int)moduleType,
+				ModuleType = (int)ModuleTypeEnum.OTHER,
+				TypeName = moduleName,
 				SerializedData = JsonConvert.SerializeObject(entities)
 			};
-			return await PostRequestAsync(ApiUriConsts.UPLOAD_BATCH_DATA, uploader, cancellationToken);
+			return await PostRequestAsync(ApiUriConsts.OTHER, uploadContext, cancellationToken);
 		}
+
+		public async Task<List<DataTable>> GetDataTables(CancellationToken cancellationToken = default(CancellationToken))
+		{
+			return await GetRequestAsync<List<DataTable>>(ApiUriConsts.DATATABLE, cancellationToken);
+		}
+
+
+
 	}
 
 	/// <summary>
