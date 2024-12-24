@@ -39,7 +39,7 @@ namespace Segmage.Services
 			return await PostRequestAsync(ApiUriConsts.PRODUCT360, entities, cancellationToken);
 		}
 
-		public async Task<ServiceResult> SenBasketd<TEntity>(TEntity entity, CancellationToken cancellationToken = default(CancellationToken))
+		public async Task<ServiceResult> SendBasket<TEntity>(TEntity entity, CancellationToken cancellationToken = default(CancellationToken))
 		{
 			return await PostRequestAsync(ApiUriConsts.BASKET, new List<TEntity>() { entity }, cancellationToken);
 		}
@@ -119,9 +119,7 @@ namespace Segmage.Services
 		{
 			return await PostRequestAsync(ApiUriConsts.ACTIVITYSUPPORT, entities, cancellationToken);
 		}
-
-
-
+		
 		public async Task<ServiceResult> SendOther<TEntity>(string moduleName, TEntity entity, CancellationToken cancellationToken = default(CancellationToken))
 		{
 			UploadContext uploadContext = new UploadContext()
