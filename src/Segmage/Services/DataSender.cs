@@ -143,6 +143,11 @@ namespace Segmage.Services
 			return await PostRequestAsync(ApiUriConsts.OTHER, uploadContext, cancellationToken);
 		}
 
+		public async Task<ServiceResult> SendJson(string moduleName, string json, CancellationToken cancellationToken = default)
+		{
+			return await PostJsonRequestAsync(moduleName, json, cancellationToken);
+		}
+
 		public async Task<List<DataTable>> GetDataTables(CancellationToken cancellationToken = default(CancellationToken))
 		{
 			return await GetRequestAsync<List<DataTable>>(ApiUriConsts.DATATABLE, cancellationToken);

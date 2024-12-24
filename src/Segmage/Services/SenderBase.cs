@@ -58,6 +58,39 @@ namespace Segmage.Services
 			return result;
 		}
 
+		protected async Task<ServiceResult> PostJsonRequestAsync(string moduleName, string body, CancellationToken cancellationToken = default)
+		{
+			var result = new ServiceResult();
+			using (var httpClient = new HttpClient())
+			{
+				using (var request = new HttpRequestMessage(new HttpMethod("POST"), ToRequestUri("{0}/dt/JsonRequest")))
+				{
+					request.Headers.TryAddWithoutValidation("Authorization",
+						"Bearer " + _options.Credential.AccessToken);
+					request.Headers.TryAddWithoutValidation("accept", "*/*");
+					UploadContext uploadContext = new UploadContext()
+					{
+						TypeName = moduleName,
+						SerializedData = body
+					};
+					request.Content = new StringContent(JsonConvert.SerializeObject(uploadContext));
+					request.Content.Headers.ContentType = MediaTypeHeaderValue.Parse("application/json");
+
+					var response = await httpClient.SendAsync(request, cancellationToken);
+					result = new ServiceResult()
+					{
+						StatusCode = response.StatusCode,
+						IsSuccessStatusCode = response.IsSuccessStatusCode
+					};
+					if (response.IsSuccessStatusCode)
+					{
+						result.Data = await response.Content.ReadAsStringAsync();
+					}
+				}
+			}
+			return result;
+		}
+
 
 		protected async Task<T> GetRequestAsync<T>(string path, CancellationToken cancellationToken = default)
 		{
@@ -105,7 +138,7 @@ namespace Segmage.Services
 
 				}
 			}
-			return false;;
+			return false; ;
 		}
 	}
 }
