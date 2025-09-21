@@ -17,6 +17,7 @@ namespace Segmage
 		public const string CUSTOMER60 = "{0}/dt/Customer360";
 		public const string PRODUCT360 = "{0}/dt/Product360";
 		public const string BASKET = "{0}/dt/Basket";
+		public const string BASKET_FLUSH = "{0}/dt/BasketFlush";
 		public const string OPPORTUNITY = "{0}/dt/Opportnity";
 		public const string PRICEOFFER = "{0}/dt/PriceOffer";
 		public const string SALE = "{0}/dt/Sale";
@@ -31,6 +32,5 @@ namespace Segmage
 		public const string DATATABLE = "{0}/dt/GetDataTables";
 		public const string EVENTS = "{0}/dt/GetEvents";
 		public const string TOKENVALIDATE = "{0}/dt/TokenValidation";
-
 	}
 }

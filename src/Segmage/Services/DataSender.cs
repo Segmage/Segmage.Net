@@ -43,6 +43,12 @@ namespace Segmage.Services
 		{
 			return await PostRequestAsync(ApiUriConsts.BASKET, new List<TEntity>() { entity }, cancellationToken);
 		}
+
+		public async Task<ServiceResult> FlushBasket(string userId, CancellationToken cancellationToken = default(CancellationToken))
+		{
+			return await PostRequestAsync(ApiUriConsts.BASKET_FLUSH, new List<FlushRequest>() { new FlushRequest() { UserId = userId } }, cancellationToken);
+		}
+
 		public async Task<ServiceResult> SendBatchBasket<TEntity>(List<TEntity> entities, CancellationToken cancellationToken = default(CancellationToken))
 		{
 			return await PostRequestAsync(ApiUriConsts.BASKET, entities, cancellationToken);
@@ -119,7 +125,7 @@ namespace Segmage.Services
 		{
 			return await PostRequestAsync(ApiUriConsts.ACTIVITYSUPPORT, entities, cancellationToken);
 		}
-		
+
 		public async Task<ServiceResult> SendOther<TEntity>(string moduleName, TEntity entity, CancellationToken cancellationToken = default(CancellationToken))
 		{
 			UploadContext uploadContext = new UploadContext()
