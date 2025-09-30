@@ -81,10 +81,11 @@ namespace Segmage.Services
 		/// <returns></returns>
 		public async Task<ServiceResult> SendCustomEventAsync(string eventUniqName, Custom @event, CancellationToken cancellationToken = default) => await ExecuteAsync(string.Format(ApiUriConsts.CUSTOM_EVENT, "{0}", eventUniqName), @event, cancellationToken);
 
-		//public async Task<List<Event>> GetEvents(CancellationToken cancellationToken = default(CancellationToken))
-		//{
-		//	return await GetRequestAsync<List<Event>>(ApiUriConsts.EVENTS, cancellationToken);
-		//}
+
+		public async Task<List<Event>> GetEvents(CancellationToken cancellationToken = default(CancellationToken))
+		{
+			return await GetRequestAsync<List<Event>>(ApiUriConsts.EVENTS, cancellationToken);
+		}
 
 		private async Task<ServiceResult> ExecuteAsync(string path, SegmageAction @event, CancellationToken cancellationToken)
 		{

@@ -200,6 +200,21 @@
 		<div class="col"><div class="card test-card h-100"><div class="card-body"><h5 class="card-title"><span class="badge bg-primary">POST</span> Search</h5><button class="btn btn-sm btn-outline-secondary w-100 mt-3 run-test" data-url="/Test/TestSendSearchEvent" data-method="POST">Çalıştır</button></div></div></div>
 		<div class="col"><div class="card test-card h-100"><div class="card-body"><h5 class="card-title"><span class="badge bg-primary">POST</span> Custom</h5><button class="btn btn-sm btn-outline-secondary w-100 mt-3 run-test" data-url="/Test/TestSendCustomEvent" data-method="POST">Çalıştır</button></div></div></div>
 	</div>
+
+	<h2 class="section-title mt-5"><i class="bi bi-send-fill fs-4 text-primary"></i> Utility Testleri</h2>
+	<div class="row">
+		<div class="col-md-12 mb-4">
+			<div class="card test-card">
+				<div class="card-body">
+					<h5 class="card-title"><span class="badge bg-info text-dark">GET</span> /Test/TestGetDataTables</h5>
+					<p class="card-text small">Sistemde tanımlı tüm veri tablolarının listesini getirir ve aşağıda listeler.</p>
+					<button class="btn btn-primary w-100 mt-3" id="btnGetDataTables">Veri Tablolarını Getir</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div id="dataTablesResult" class="mt-3"></div>
 </div>
 
 <div class="modal fade" id="responseModal" tabindex="-1" aria-labelledby="responseModalLabel" aria-hidden="true">
@@ -235,6 +250,56 @@
 					complete: function(){ button.prop('disabled', false).removeClass('disabled'); }
 				});
 			});
+
+			$('#btnGetDataTables').on('click', function (e) {
+			e.preventDefault();
+
+			var button = $(this);
+			var resultContainer = $('#dataTablesResult');
+			var url = '/Test/TestGetDataTables';
+
+			// Butonu devre dışı bırak ve yükleniyor animasyonu ekle
+			button.prop('disabled', true).addClass('disabled');
+			resultContainer.html('<div class="d-flex justify-content-center align-items-center p-5"><div class="spinner-border text-primary" role="status"><span class="visually-hidden">Loading...</span></div></div>');
+
+			$.ajax({
+				url: url,
+				type: 'GET',
+				success: function (data) {
+					// Veri varsa tabloyu oluştur
+					if (data && data.length > 0) {
+						var tableHtml = '<table class="table table-striped table-bordered table-hover mt-3">';
+						tableHtml += '<thead class="table-dark"><tr><th>ID</th><th>Module Type</th><th>Name</th><th>Type Name</th></tr></thead>';
+						tableHtml += '<tbody>';
+
+						// Her bir veri için satır oluştur
+						$.each(data, function(index, item) {
+							tableHtml += '<tr>';
+							tableHtml += '<td>' + item.id + '</td>';
+							tableHtml += '<td>' + item.moduleType + '</td>';
+							tableHtml += '<td>' + item.name + '</td>';
+							tableHtml += '<td>' + item.typeName + '</td>';
+							tableHtml += '</tr>';
+						});
+
+						tableHtml += '</tbody></table>';
+						resultContainer.html(tableHtml);
+					} else {
+						// Veri yoksa mesaj göster
+						resultContainer.html('<div class="alert alert-warning mt-3">Gösterilecek veri bulunamadı.</div>');
+					}
+				},
+				error: function (jqXHR) {
+					// Hata durumunda mesaj göster
+					var errorText = `Hata: ${jqXHR.status} - ${jqXHR.statusText}`;
+					resultContainer.html('<div class="alert alert-danger mt-3">' + errorText + '</div>');
+				},
+				complete: function() {
+					// Butonu tekrar aktif et
+					button.prop('disabled', false).removeClass('disabled');
+				}
+			});
+		});
 		});
 	</script>
 }
