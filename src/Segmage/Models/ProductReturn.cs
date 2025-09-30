@@ -1,17 +1,18 @@
-﻿using System;
+﻿
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Segmage.Models
 {
-	public abstract class ProductReturn : BaseEvent
+	public class ProductReturn : ProductExchangeBase
 	{
 		public string OpportunityId { get; set; }
 
 		public string OfferId { get; set; }
 
 		public string SaleId { get; set; }
+
+		public string UserId { get; set; }
+
+		public List<ProductReturnItem> Items { get; set; }
 	}
 }

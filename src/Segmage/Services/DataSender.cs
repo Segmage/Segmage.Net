@@ -1,172 +1,338 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Data;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using Segmage.Models;
-using DataTable = Segmage.Models.DataTable;
 
 namespace Segmage.Services
 {
-	/// <summary>
-	/// Service class for sending various types of data (e.g., Customer360, Product360) to an API.
-	/// </summary>
 	public class DataSender : SenderBase
 	{
+		private readonly string _baseUrl;
 		/// <summary>
 		/// Initializes a new instance of the DataSender class with the given application options.
 		/// </summary>
 		/// <param name="options">Application options used for configuration.</param>
-		public DataSender(AppOptions options) : base(options) { }
-
-
-		public async Task<ServiceResult> SendCustomer360<TEntity>(TEntity entity, CancellationToken cancellationToken = default(CancellationToken))
-		{
-			return await PostRequestAsync(ApiUriConsts.CUSTOMER60, new List<TEntity>() { entity }, cancellationToken);
-		}
-		public async Task<ServiceResult> SendBatchCustomer360<TEntity>(List<TEntity> entities, CancellationToken cancellationToken = default(CancellationToken))
-		{
-			return await PostRequestAsync(ApiUriConsts.CUSTOMER60, entities, cancellationToken);
+		public DataSender(AppOptions options) : base(options) {
+			_baseUrl = options.Credential.CollectUrl;
 		}
 
-		public async Task<ServiceResult> SendProduct<TEntity>(TEntity entity, CancellationToken cancellationToken = default(CancellationToken))
+		#region Customer360 Methods
+
+		public async Task<ServiceResult> SaveCustomer360(Customer360 entity, CancellationToken cancellationToken = default) =>
+			await PostRequestAsync(string.Format(ApiUriConsts.CUSTOMER360, _baseUrl), entity, cancellationToken);
+
+		public async Task<ServiceResult> SaveBatchCustomer360(List<Customer360> entities, CancellationToken cancellationToken = default) =>
+			await PostRequestAsync(string.Format(ApiUriConsts.CUSTOMER360_BATCH, _baseUrl), entities, cancellationToken);
+
+		public async Task<ServiceResult> UpdateCustomer360(Customer360 entity, CancellationToken cancellationToken = default) =>
+			await PutRequestAsync(string.Format(ApiUriConsts.CUSTOMER360, _baseUrl), entity, cancellationToken);
+
+		public async Task<ServiceResult> UpdateBatchCustomer360(List<Customer360> entities, CancellationToken cancellationToken = default) =>
+			await PutRequestAsync(string.Format(ApiUriConsts.CUSTOMER360_BATCH, _baseUrl), entities, cancellationToken);
+
+		public async Task<ServiceResult> DeleteCustomer360(string id, CancellationToken cancellationToken = default)
 		{
-			return await PostRequestAsync(ApiUriConsts.PRODUCT360, new List<TEntity>() { entity }, cancellationToken);
-		}
-		public async Task<ServiceResult> SendBatchProduct<TEntity>(List<TEntity> entities, CancellationToken cancellationToken = default(CancellationToken))
-		{
-			return await PostRequestAsync(ApiUriConsts.PRODUCT360, entities, cancellationToken);
+			var path = string.Format(ApiUriConsts.CUSTOMER360_BY_ID, _baseUrl, id);
+			return await DeleteRequestAsync(path, cancellationToken);
 		}
 
-		public async Task<ServiceResult> SendBasket<TEntity>(TEntity entity, CancellationToken cancellationToken = default(CancellationToken))
+		#endregion
+
+		#region Product Methods
+
+		public async Task<ServiceResult> SaveProduct(Product360 entity, CancellationToken cancellationToken = default) =>
+			await PostRequestAsync(string.Format(ApiUriConsts.PRODUCT360, _baseUrl), entity, cancellationToken);
+
+		public async Task<ServiceResult> SaveBatchProduct(List<Product360> entities, CancellationToken cancellationToken = default) =>
+			await PostRequestAsync(string.Format(ApiUriConsts.PRODUCT360_BATCH, _baseUrl), entities, cancellationToken);
+
+		public async Task<ServiceResult> UpdateProduct(Product360 entity, CancellationToken cancellationToken = default) =>
+			await PutRequestAsync(string.Format(ApiUriConsts.PRODUCT360, _baseUrl), entity, cancellationToken);
+
+		public async Task<ServiceResult> UpdateBatchProduct(List<Product360> entities, CancellationToken cancellationToken = default) =>
+			await PutRequestAsync(string.Format(ApiUriConsts.PRODUCT360_BATCH, _baseUrl), entities, cancellationToken);
+
+		public async Task<ServiceResult> DeleteProduct(string id, CancellationToken cancellationToken = default)
 		{
-			return await PostRequestAsync(ApiUriConsts.BASKET, new List<TEntity>() { entity }, cancellationToken);
+			var path = string.Format(ApiUriConsts.PRODUCT360_BY_ID, _baseUrl, id);
+			return await DeleteRequestAsync(path, cancellationToken);
 		}
 
-		public async Task<ServiceResult> FlushBasket(string userId, CancellationToken cancellationToken = default(CancellationToken))
+		#endregion
+
+		#region Basket Methods
+
+		public async Task<ServiceResult> SaveBasket(Basket entity, CancellationToken cancellationToken = default) =>
+			await PostRequestAsync(string.Format(ApiUriConsts.BASKET, _baseUrl), entity, cancellationToken);
+
+		public async Task<ServiceResult> SaveBatchBasket(List<Basket> entities, CancellationToken cancellationToken = default) =>
+			await PostRequestAsync(string.Format(ApiUriConsts.BASKET_BATCH, _baseUrl), entities, cancellationToken);
+
+		public async Task<ServiceResult> UpdateBasket(Basket entity, CancellationToken cancellationToken = default) =>
+			await PutRequestAsync(string.Format(ApiUriConsts.BASKET, _baseUrl), entity, cancellationToken);
+
+		public async Task<ServiceResult> UpdateBatchBasket(List<Basket> entities, CancellationToken cancellationToken = default) =>
+			await PutRequestAsync(string.Format(ApiUriConsts.BASKET_BATCH, _baseUrl), entities, cancellationToken);
+
+		public async Task<ServiceResult> DeleteBasket(string id, CancellationToken cancellationToken = default)
 		{
-			return await PostRequestAsync(ApiUriConsts.BASKET_FLUSH, new List<FlushRequest>() { new FlushRequest() { UserId = userId } }, cancellationToken);
+			var path = string.Format(ApiUriConsts.BASKET_BY_ID, _baseUrl, id);
+			return await DeleteRequestAsync(path, cancellationToken);
+		}
+		public async Task<ServiceResult> FlushBasket(string userId, CancellationToken cancellationToken = default) =>
+			await PostRequestAsync(string.Format(ApiUriConsts.BASKET_FLUSH, _baseUrl), new FlushRequest { UserId = userId }, cancellationToken);
+
+		#endregion
+
+		#region Opportunity Methods
+
+		public async Task<ServiceResult> SaveOpportunity(Opportunity entity, CancellationToken cancellationToken = default) =>
+			await PostRequestAsync(string.Format(ApiUriConsts.OPPORTUNITY, _baseUrl), entity, cancellationToken);
+
+		public async Task<ServiceResult> SaveBatchOpportunity(List<Opportunity> entities, CancellationToken cancellationToken = default) =>
+			await PostRequestAsync(string.Format(ApiUriConsts.OPPORTUNITY_BATCH, _baseUrl), entities, cancellationToken);
+
+		public async Task<ServiceResult> UpdateOpportunity(Opportunity entity, CancellationToken cancellationToken = default) =>
+			await PutRequestAsync(string.Format(ApiUriConsts.OPPORTUNITY, _baseUrl), entity, cancellationToken);
+
+		public async Task<ServiceResult> UpdateBatchOpportunity(List<Opportunity> entities, CancellationToken cancellationToken = default) =>
+			await PutRequestAsync(string.Format(ApiUriConsts.OPPORTUNITY_BATCH, _baseUrl), entities, cancellationToken);
+
+		public async Task<ServiceResult> DeleteOpportunity(string id, CancellationToken cancellationToken = default)
+		{
+			var path = string.Format(ApiUriConsts.OPPORTUNITY_BY_ID, _baseUrl, id);
+			return await DeleteRequestAsync(path, cancellationToken);
 		}
 
-		public async Task<ServiceResult> SendBatchBasket<TEntity>(List<TEntity> entities, CancellationToken cancellationToken = default(CancellationToken))
+		#endregion
+
+		#region PriceOffer Methods
+
+		public async Task<ServiceResult> SavePriceOffer(Offer entity, CancellationToken cancellationToken = default) =>
+			await PostRequestAsync(string.Format(ApiUriConsts.PRICEOFFER, _baseUrl), entity, cancellationToken);
+
+		public async Task<ServiceResult> SaveBatchPriceOffer(List<Offer> entities, CancellationToken cancellationToken = default) =>
+			await PostRequestAsync(string.Format(ApiUriConsts.PRICEOFFER_BATCH, _baseUrl), entities, cancellationToken);
+
+		public async Task<ServiceResult> UpdatePriceOffer(Offer entity, CancellationToken cancellationToken = default) =>
+			await PutRequestAsync(string.Format(ApiUriConsts.PRICEOFFER, _baseUrl), entity, cancellationToken);
+
+		public async Task<ServiceResult> UpdateBatchPriceOffer(List<Offer> entities, CancellationToken cancellationToken = default) =>
+			await PutRequestAsync(string.Format(ApiUriConsts.PRICEOFFER_BATCH, _baseUrl), entities, cancellationToken);
+
+		public async Task<ServiceResult> DeletePriceOffer(string id, CancellationToken cancellationToken = default)
 		{
-			return await PostRequestAsync(ApiUriConsts.BASKET, entities, cancellationToken);
+			var path = string.Format(ApiUriConsts.PRICEOFFER_BY_ID, _baseUrl, id);
+			return await DeleteRequestAsync(path, cancellationToken);
 		}
 
-		public async Task<ServiceResult> SendOpportunity<TEntity>(TEntity entity, CancellationToken cancellationToken = default(CancellationToken))
+		#endregion
+
+		#region Sale Methods
+
+		public async Task<ServiceResult> SaveSale(Sale entity, CancellationToken cancellationToken = default) =>
+			await PostRequestAsync(string.Format(ApiUriConsts.SALE, _baseUrl), entity, cancellationToken);
+
+		public async Task<ServiceResult> SaveBatchSale(List<Sale> entities, CancellationToken cancellationToken = default) =>
+			await PostRequestAsync(string.Format(ApiUriConsts.SALE_BATCH, _baseUrl), entities, cancellationToken);
+
+		public async Task<ServiceResult> UpdateSale(Sale entity, CancellationToken cancellationToken = default) =>
+			await PutRequestAsync(string.Format(ApiUriConsts.SALE, _baseUrl), entity, cancellationToken);
+
+		public async Task<ServiceResult> UpdateBatchSale(List<Sale> entities, CancellationToken cancellationToken = default) =>
+			await PutRequestAsync(string.Format(ApiUriConsts.SALE_BATCH, _baseUrl), entities, cancellationToken);
+
+		public async Task<ServiceResult> DeleteSale(string id, CancellationToken cancellationToken = default)
 		{
-			return await PostRequestAsync(ApiUriConsts.OPPORTUNITY, new List<TEntity>() { entity }, cancellationToken);
-		}
-		public async Task<ServiceResult> SendBatchOpportunity<TEntity>(List<TEntity> entities, CancellationToken cancellationToken = default(CancellationToken))
-		{
-			return await PostRequestAsync(ApiUriConsts.OPPORTUNITY, entities, cancellationToken);
+			var path = string.Format(ApiUriConsts.SALE_BY_ID, _baseUrl, id);
+			return await DeleteRequestAsync(path, cancellationToken);
 		}
 
-		public async Task<ServiceResult> SendSale<TEntity>(TEntity entity, CancellationToken cancellationToken = default(CancellationToken))
+		#endregion
+
+		#region Lead Methods
+
+		public async Task<ServiceResult> SaveLead(Lead entity, CancellationToken cancellationToken = default) =>
+			await PostRequestAsync(string.Format(ApiUriConsts.LEAD, _baseUrl), entity, cancellationToken);
+
+		public async Task<ServiceResult> SaveBatchLead(List<Lead> entities, CancellationToken cancellationToken = default) =>
+			await PostRequestAsync(string.Format(ApiUriConsts.LEAD_BATCH, _baseUrl), entities, cancellationToken);
+
+		public async Task<ServiceResult> UpdateLead(Lead entity, CancellationToken cancellationToken = default) =>
+			await PutRequestAsync(string.Format(ApiUriConsts.LEAD, _baseUrl), entity, cancellationToken);
+
+		public async Task<ServiceResult> UpdateBatchLead(List<Lead> entities, CancellationToken cancellationToken = default) =>
+			await PutRequestAsync(string.Format(ApiUriConsts.LEAD_BATCH, _baseUrl), entities, cancellationToken);
+
+		public async Task<ServiceResult> DeleteLead(string id, CancellationToken cancellationToken = default)
 		{
-			return await PostRequestAsync(ApiUriConsts.SALE, new List<TEntity>() { entity }, cancellationToken);
-		}
-		public async Task<ServiceResult> SendBatchSale<TEntity>(List<TEntity> entities, CancellationToken cancellationToken = default(CancellationToken))
-		{
-			return await PostRequestAsync(ApiUriConsts.SALE, entities, cancellationToken);
+			var path = string.Format(ApiUriConsts.LEAD_BY_ID, _baseUrl, id);
+			return await DeleteRequestAsync(path, cancellationToken);
 		}
 
-		public async Task<ServiceResult> SendLead<TEntity>(TEntity entity, CancellationToken cancellationToken = default(CancellationToken))
+		#endregion
+
+		#region Return Methods
+
+		public async Task<ServiceResult> SaveReturn(ProductReturn entity, CancellationToken cancellationToken = default) =>
+			await PostRequestAsync(string.Format(ApiUriConsts.RETURN, _baseUrl), entity, cancellationToken);
+
+		public async Task<ServiceResult> SaveBatchReturn(List<ProductReturn> entities, CancellationToken cancellationToken = default) =>
+			await PostRequestAsync(string.Format(ApiUriConsts.RETURN_BATCH, _baseUrl), entities, cancellationToken);
+
+		public async Task<ServiceResult> UpdateReturn(ProductReturn entity, CancellationToken cancellationToken = default) =>
+			await PutRequestAsync(string.Format(ApiUriConsts.RETURN, _baseUrl), entity, cancellationToken);
+
+		public async Task<ServiceResult> UpdateBatchReturn(List<ProductReturn> entities, CancellationToken cancellationToken = default) =>
+			await PutRequestAsync(string.Format(ApiUriConsts.RETURN_BATCH, _baseUrl), entities, cancellationToken);
+
+		public async Task<ServiceResult> DeleteReturn(string id, CancellationToken cancellationToken = default)
 		{
-			return await PostRequestAsync(ApiUriConsts.LEAD, new List<TEntity>() { entity }, cancellationToken);
-		}
-		public async Task<ServiceResult> SendBatchLead<TEntity>(List<TEntity> entities, CancellationToken cancellationToken = default(CancellationToken))
-		{
-			return await PostRequestAsync(ApiUriConsts.LEAD, entities, cancellationToken);
+			var path = string.Format(ApiUriConsts.RETURN_BY_ID, _baseUrl, id);
+			return await DeleteRequestAsync(path, cancellationToken);
 		}
 
-		public async Task<ServiceResult> SendReturn<TEntity>(TEntity entity, CancellationToken cancellationToken = default(CancellationToken))
+		#endregion
+
+		#region ActivityAppointment Methods
+
+		public async Task<ServiceResult> SaveActivityAppointment(ActivityAppointment entity, CancellationToken cancellationToken = default) =>
+			await PostRequestAsync(string.Format(ApiUriConsts.ACTIVITYAPPOINTMENT, _baseUrl), entity, cancellationToken);
+
+		public async Task<ServiceResult> SaveBatchActivityAppointment(List<ActivityAppointment> entities, CancellationToken cancellationToken = default) =>
+			await PostRequestAsync(string.Format(ApiUriConsts.ACTIVITYAPPOINTMENT_BATCH, _baseUrl), entities, cancellationToken);
+
+		public async Task<ServiceResult> UpdateActivityAppointment(ActivityAppointment entity, CancellationToken cancellationToken = default) =>
+			await PutRequestAsync(string.Format(ApiUriConsts.ACTIVITYAPPOINTMENT, _baseUrl), entity, cancellationToken);
+
+		public async Task<ServiceResult> UpdateBatchActivityAppointment(List<ActivityAppointment> entities, CancellationToken cancellationToken = default) =>
+			await PutRequestAsync(string.Format(ApiUriConsts.ACTIVITYAPPOINTMENT_BATCH, _baseUrl), entities, cancellationToken);
+
+		public async Task<ServiceResult> DeleteActivityAppointment(string id, CancellationToken cancellationToken = default)
 		{
-			return await PostRequestAsync(ApiUriConsts.RETURN, new List<TEntity>() { entity }, cancellationToken);
-		}
-		public async Task<ServiceResult> SendBatchReturn<TEntity>(List<TEntity> entities, CancellationToken cancellationToken = default(CancellationToken))
-		{
-			return await PostRequestAsync(ApiUriConsts.RETURN, entities, cancellationToken);
+			var path = string.Format(ApiUriConsts.ACTIVITYAPPOINTMENT_BY_ID, _baseUrl, id);
+			return await DeleteRequestAsync(path, cancellationToken);
 		}
 
-		public async Task<ServiceResult> SendActivityAppointment<TEntity>(TEntity entity, CancellationToken cancellationToken = default(CancellationToken))
+		#endregion
+
+		#region ActivityMeeting Methods
+
+		public async Task<ServiceResult> SaveActivityMeeting(ActivityMeeting entity, CancellationToken cancellationToken = default) =>
+			await PostRequestAsync(string.Format(ApiUriConsts.ACTIVITYMEETING, _baseUrl), entity, cancellationToken);
+
+		public async Task<ServiceResult> SaveBatchActivityMeeting(List<ActivityMeeting> entities, CancellationToken cancellationToken = default) =>
+			await PostRequestAsync(string.Format(ApiUriConsts.ACTIVITYMEETING_BATCH, _baseUrl), entities, cancellationToken);
+
+		public async Task<ServiceResult> UpdateActivityMeeting(ActivityMeeting entity, CancellationToken cancellationToken = default) =>
+			await PutRequestAsync(string.Format(ApiUriConsts.ACTIVITYMEETING, _baseUrl), entity, cancellationToken);
+
+		public async Task<ServiceResult> UpdateBatchActivityMeeting(List<ActivityMeeting> entities, CancellationToken cancellationToken = default) =>
+			await PutRequestAsync(string.Format(ApiUriConsts.ACTIVITYMEETING_BATCH, _baseUrl), entities, cancellationToken);
+
+		public async Task<ServiceResult> DeleteActivityMeeting(string id, CancellationToken cancellationToken = default)
 		{
-			return await PostRequestAsync(ApiUriConsts.ACTIVITYAPPOINTMENT, new List<TEntity>() { entity }, cancellationToken);
-		}
-		public async Task<ServiceResult> SendBatch<TEntity>(List<TEntity> entities, CancellationToken cancellationToken = default(CancellationToken))
-		{
-			return await PostRequestAsync(ApiUriConsts.ACTIVITYAPPOINTMENT, entities, cancellationToken);
+			var path = string.Format(ApiUriConsts.ACTIVITYMEETING_BY_ID, _baseUrl, id);
+			return await DeleteRequestAsync(path, cancellationToken);
 		}
 
-		public async Task<ServiceResult> SendActivityMeeting<TEntity>(TEntity entity, CancellationToken cancellationToken = default(CancellationToken))
+		#endregion
+
+		#region ActivityPhone Methods
+
+		public async Task<ServiceResult> SaveActivityPhone(ActivityPhone entity, CancellationToken cancellationToken = default) =>
+			await PostRequestAsync(string.Format(ApiUriConsts.ACTIVITYPHONE, _baseUrl), entity, cancellationToken);
+
+		public async Task<ServiceResult> SaveBatchActivityPhone(List<ActivityPhone> entities, CancellationToken cancellationToken = default) =>
+			await PostRequestAsync(string.Format(ApiUriConsts.ACTIVITYPHONE_BATCH, _baseUrl), entities, cancellationToken);
+
+		public async Task<ServiceResult> UpdateActivityPhone(ActivityPhone entity, CancellationToken cancellationToken = default) =>
+			await PutRequestAsync(string.Format(ApiUriConsts.ACTIVITYPHONE, _baseUrl), entity, cancellationToken);
+
+		public async Task<ServiceResult> UpdateBatchActivityPhone(List<ActivityPhone> entities, CancellationToken cancellationToken = default) =>
+			await PutRequestAsync(string.Format(ApiUriConsts.ACTIVITYPHONE_BATCH, _baseUrl), entities, cancellationToken);
+
+		public async Task<ServiceResult> DeleteActivityPhone(string id, CancellationToken cancellationToken = default)
 		{
-			return await PostRequestAsync(ApiUriConsts.ACTIVITYMEETING, new List<TEntity>() { entity }, cancellationToken);
-		}
-		public async Task<ServiceResult> SendBatchActivityMeeting<TEntity>(List<TEntity> entities, CancellationToken cancellationToken = default(CancellationToken))
-		{
-			return await PostRequestAsync(ApiUriConsts.ACTIVITYMEETING, entities, cancellationToken);
+			var path = string.Format(ApiUriConsts.ACTIVITYPHONE_BY_ID, _baseUrl, id);
+			return await DeleteRequestAsync(path, cancellationToken);
 		}
 
-		public async Task<ServiceResult> SendActivityPhone<TEntity>(TEntity entity, CancellationToken cancellationToken = default(CancellationToken))
+		#endregion
+
+		#region ActivitySupport Methods
+
+		public async Task<ServiceResult> SaveActivitySupport(ActivitySupport entity, CancellationToken cancellationToken = default) =>
+			await PostRequestAsync(string.Format(ApiUriConsts.ACTIVITYSUPPORT, _baseUrl), entity, cancellationToken);
+
+		public async Task<ServiceResult> SaveBatchActivitySupport(List<ActivitySupport> entities, CancellationToken cancellationToken = default) =>
+			await PostRequestAsync(string.Format(ApiUriConsts.ACTIVITYSUPPORT_BATCH, _baseUrl), entities, cancellationToken);
+
+		public async Task<ServiceResult> UpdateActivitySupport(ActivitySupport entity, CancellationToken cancellationToken = default) =>
+			await PutRequestAsync(string.Format(ApiUriConsts.ACTIVITYSUPPORT, _baseUrl), entity, cancellationToken);
+
+		public async Task<ServiceResult> UpdateBatchActivitySupport(List<ActivitySupport> entities, CancellationToken cancellationToken = default) =>
+			await PutRequestAsync(string.Format(ApiUriConsts.ACTIVITYSUPPORT_BATCH, _baseUrl), entities, cancellationToken);
+
+		public async Task<ServiceResult> DeleteActivitySupport(string id, CancellationToken cancellationToken = default)
 		{
-			return await PostRequestAsync(ApiUriConsts.ACTIVITYPHONE, new List<TEntity>() { entity }, cancellationToken);
-		}
-		public async Task<ServiceResult> SendBatchActivityPhone<TEntity>(List<TEntity> entities, CancellationToken cancellationToken = default(CancellationToken))
-		{
-			return await PostRequestAsync(ApiUriConsts.ACTIVITYPHONE, entities, cancellationToken);
+			var path = string.Format(ApiUriConsts.ACTIVITYSUPPORT_BY_ID, _baseUrl, id);
+			return await DeleteRequestAsync(path, cancellationToken);
 		}
 
-		public async Task<ServiceResult> SendActivitySupport<TEntity>(TEntity entity, CancellationToken cancellationToken = default(CancellationToken))
+		#endregion
+
+		#region Other Methods (Generic)
+
+		public async Task<ServiceResult> SaveOther(object entity, CancellationToken cancellationToken = default) =>
+			await PostRequestAsync(string.Format(ApiUriConsts.OTHER, _baseUrl), entity, cancellationToken);
+
+		public async Task<ServiceResult> SaveBatchOther(List<object> entities, CancellationToken cancellationToken = default) =>
+			await PostRequestAsync(string.Format(ApiUriConsts.OTHER_BATCH, _baseUrl), entities, cancellationToken);
+
+		public async Task<ServiceResult> UpdateOther(object entity, CancellationToken cancellationToken = default) =>
+			await PutRequestAsync(string.Format(ApiUriConsts.OTHER, _baseUrl), entity, cancellationToken);
+
+		public async Task<ServiceResult> UpdateBatchOther(List<object> entities, CancellationToken cancellationToken = default) =>
+			await PutRequestAsync(string.Format(ApiUriConsts.OTHER_BATCH, _baseUrl), entities, cancellationToken);
+
+		public async Task<ServiceResult> DeleteOther(string id, CancellationToken cancellationToken = default)
 		{
-			return await PostRequestAsync(ApiUriConsts.ACTIVITYSUPPORT, new List<TEntity>() { entity }, cancellationToken);
-		}
-		public async Task<ServiceResult> SendBatchActivitySupport<TEntity>(List<TEntity> entities, CancellationToken cancellationToken = default(CancellationToken))
-		{
-			return await PostRequestAsync(ApiUriConsts.ACTIVITYSUPPORT, entities, cancellationToken);
+			var path = string.Format(ApiUriConsts.OTHER_BY_ID, _baseUrl, id);
+			return await DeleteRequestAsync(path, cancellationToken);
 		}
 
-		public async Task<ServiceResult> SendOther<TEntity>(string moduleName, TEntity entity, CancellationToken cancellationToken = default(CancellationToken))
-		{
-			UploadContext uploadContext = new UploadContext()
-			{
-				ModuleType = (int)ModuleTypeEnum.OTHER,
-				TypeName = moduleName,
-				SerializedData = JsonConvert.SerializeObject(new List<TEntity>() { entity })
-			};
-			return await PostRequestAsync(ApiUriConsts.OTHER, uploadContext, cancellationToken);
-		}
-		public async Task<ServiceResult> SendBatchOther<TEntity>(string moduleName, List<TEntity> entities, CancellationToken cancellationToken = default(CancellationToken))
-		{
-			UploadContext uploadContext = new UploadContext()
-			{
-				ModuleType = (int)ModuleTypeEnum.OTHER,
-				TypeName = moduleName,
-				SerializedData = JsonConvert.SerializeObject(entities)
-			};
-			return await PostRequestAsync(ApiUriConsts.OTHER, uploadContext, cancellationToken);
-		}
+		#endregion
 
-		public async Task<ServiceResult> SendJson(string moduleName, string json, CancellationToken cancellationToken = default)
-		{
-			return await PostJsonRequestAsync(moduleName, json, cancellationToken);
-		}
+		#region Utility Methods
 
-		public async Task<List<DataTable>> GetDataTables(CancellationToken cancellationToken = default(CancellationToken))
-		{
-			return await GetRequestAsync<List<DataTable>>(ApiUriConsts.DATATABLE, cancellationToken);
-		}
+		public async Task<ServiceResult> SendJson(string moduleName, string json, CancellationToken cancellationToken = default) =>
+			await PostJsonRequestAsync(moduleName, json, cancellationToken);
 
-		public async Task<bool> ValidateToken(CancellationToken cancellationToken = default(CancellationToken))
-		{
-			return await base.ValidateToken(cancellationToken);
-		}
+		public async Task<List<DataTable>> GetDataTables(CancellationToken cancellationToken = default) =>
+			await GetRequestAsync<List<DataTable>>(ApiUriConsts.DATATABLE, cancellationToken);
+
+		public async Task<bool> ValidateToken(CancellationToken cancellationToken = default) =>
+			await base.ValidateToken(cancellationToken);
+
+		#endregion
 
 	}
 
+	#region Helper Classes
+
 	/// <summary>
-	/// Represents the context for uploading data.
+	/// Represents a request to flush a basket.
 	/// </summary>
+	public class FlushRequest
+	{
+		public string UserId { get; set; }
+	}
+
+
 	public class UploadContext
 	{
 		/// <summary>
@@ -184,4 +350,5 @@ namespace Segmage.Services
 		/// </summary>
 		public string SerializedData { get; set; }
 	}
+	#endregion
 }

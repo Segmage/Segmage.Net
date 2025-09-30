@@ -1,8 +1,240 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+	ViewData["Title"] = "Segmage SDK Test Paneli";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css">
+
+<style>
+	body {
+		background-color: #f8f9fa;
+	}
+
+	.test-card {
+		transition: all 0.2s ease-in-out;
+		height: 100%;
+	}
+
+		.test-card:hover {
+			transform: translateY(-5px);
+			box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+		}
+
+	.card-body {
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
+		text-align: center;
+	}
+
+	.card-title {
+		font-size: 1rem;
+	}
+
+		.card-title .badge {
+			font-size: 0.8rem;
+			vertical-align: middle;
+		}
+
+	.section-title {
+		display: flex;
+		align-items: center;
+		gap: 0.75rem;
+		border-bottom: 1px solid #dee2e6;
+		padding-bottom: 0.5rem;
+		margin-bottom: 1.5rem;
+	}
+
+	.response-area {
+		text-align: left;
+		background-color: #282c34;
+		color: #abb2bf;
+		border-radius: 5px;
+		padding: 15px;
+		margin-top: 15px;
+		font-family: 'Courier New', Courier, monospace;
+		font-size: 0.85rem;
+		white-space: pre-wrap;
+		word-break: break-all;
+		min-height: 200px;
+		max-height: 60vh;
+		overflow-y: auto;
+	}
+</style>
+
+<div class="text-center my-5">
+	<h1 class="display-4">Segmage .NET SDK Test Paneli</h1>
+	<p class="lead text-muted">SDK'nın DataSender ve EventSender metotlarını test etmek için aşağıdaki butonları kullanın.</p>
 </div>
+
+<div class="container-fluid mb-5 px-4">
+	<h2 class="section-title"><i class="bi bi-gear-wide-connected fs-4"></i> Başlangıç & Kurulum</h2>
+	<div class="row">
+		<div class="col-lg-6 mb-4">
+			<div class="card test-card border-primary"><div class="card-body"><div><h5 class="card-title"><span class="badge bg-info text-dark">GET</span> /Test/SetupCookie</h5><p class="card-text small"><strong>İlk bu çalıştırılmalıdır.</strong> Testler için gerekli `__sg` cookie'sini oluşturur.</p></div><button class="btn btn-primary w-100 run-test" data-url="/Test/SetupCookie" data-method="GET">1. Cookie Oluştur</button></div></div>
+		</div>
+		<div class="col-lg-6 mb-4">
+			<div class="card test-card"><div class="card-body"><div><h5 class="card-title"><span class="badge bg-info text-dark">GET</span> /Test/ReadSession</h5><p class="card-text small">Cookie'den okunan session verisini doğrular.</p></div><button class="btn btn-outline-secondary w-100 run-test" data-url="/Test/ReadSession" data-method="GET">2. Session'ı Oku</button></div></div>
+		</div>
+	</div>
+
+	<h2 class="section-title mt-5"><i class="bi bi-cloud-arrow-up-fill fs-4 text-success"></i> DataSender Testleri</h2>
+
+	<h4 class="mt-4"><i class="bi bi-person-lines-fill text-muted"></i> Customer360</h4>
+	<div class="row row-cols-2 row-cols-md-3 row-cols-lg-5 g-4">
+		<div class="col"><div class="card test-card h-100"><div class="card-body"><h5 class="card-title"><span class="badge bg-success">POST</span> Save</h5><button class="btn btn-sm btn-outline-secondary w-100 mt-3 run-test" data-url="/Test/TestSaveCustomer360" data-method="POST">Çalıştır</button></div></div></div>
+		<div class="col"><div class="card test-card h-100"><div class="card-body"><h5 class="card-title"><span class="badge bg-success">POST</span> Save Batch</h5><button class="btn btn-sm btn-outline-secondary w-100 mt-3 run-test" data-url="/Test/TestSaveBatchCustomer360" data-method="POST">Çalıştır</button></div></div></div>
+		<div class="col"><div class="card test-card h-100"><div class="card-body"><h5 class="card-title"><span class="badge bg-warning text-dark">PUT</span> Update</h5><button class="btn btn-sm btn-outline-secondary w-100 mt-3 run-test" data-url="/Test/TestUpdateCustomer360" data-method="PUT">Çalıştır</button></div></div></div>
+		<div class="col"><div class="card test-card h-100"><div class="card-body"><h5 class="card-title"><span class="badge bg-warning text-dark">PUT</span> Update Batch</h5><button class="btn btn-sm btn-outline-secondary w-100 mt-3 run-test" data-url="/Test/TestUpdateBatchCustomer360" data-method="PUT">Çalıştır</button></div></div></div>
+		<div class="col"><div class="card test-card h-100"><div class="card-body"><h5 class="card-title"><span class="badge bg-danger">DELETE</span> Delete</h5><button class="btn btn-sm btn-outline-secondary w-100 mt-3 run-test" data-url="/Test/TestDeleteCustomer360?id=CUST-001" data-method="DELETE">Çalıştır</button></div></div></div>
+	</div>
+
+	<h4 class="mt-4"><i class="bi bi-box-seam text-muted"></i> Product360</h4>
+	<div class="row row-cols-2 row-cols-md-3 row-cols-lg-5 g-4">
+		<div class="col"><div class="card test-card h-100"><div class="card-body"><h5 class="card-title"><span class="badge bg-success">POST</span> Save</h5><button class="btn btn-sm btn-outline-secondary w-100 mt-3 run-test" data-url="/Test/TestSaveProduct" data-method="POST">Çalıştır</button></div></div></div>
+		<div class="col"><div class="card test-card h-100"><div class="card-body"><h5 class="card-title"><span class="badge bg-success">POST</span> Save Batch</h5><button class="btn btn-sm btn-outline-secondary w-100 mt-3 run-test" data-url="/Test/TestSaveBatchProduct" data-method="POST">Çalıştır</button></div></div></div>
+		<div class="col"><div class="card test-card h-100"><div class="card-body"><h5 class="card-title"><span class="badge bg-warning text-dark">PUT</span> Update</h5><button class="btn btn-sm btn-outline-secondary w-100 mt-3 run-test" data-url="/Test/TestUpdateProduct" data-method="PUT">Çalıştır</button></div></div></div>
+		<div class="col"><div class="card test-card h-100"><div class="card-body"><h5 class="card-title"><span class="badge bg-warning text-dark">PUT</span> Update Batch</h5><button class="btn btn-sm btn-outline-secondary w-100 mt-3 run-test" data-url="/Test/TestUpdateBatchProduct" data-method="PUT">Çalıştır</button></div></div></div>
+		<div class="col"><div class="card test-card h-100"><div class="card-body"><h5 class="card-title"><span class="badge bg-danger">DELETE</span> Delete</h5><button class="btn btn-sm btn-outline-secondary w-100 mt-3 run-test" data-url="/Test/TestDeleteProduct?id=PROD-101" data-method="DELETE">Çalıştır</button></div></div></div>
+	</div>
+
+	<h4 class="mt-4"><i class="bi bi-cart3 text-muted"></i> Basket</h4>
+	<div class="row row-cols-2 row-cols-md-3 row-cols-lg-5 g-4">
+		<div class="col"><div class="card test-card h-100"><div class="card-body"><h5 class="card-title"><span class="badge bg-success">POST</span> Save</h5><button class="btn btn-sm btn-outline-secondary w-100 mt-3 run-test" data-url="/Test/TestSaveBasket" data-method="POST">Çalıştır</button></div></div></div>
+		<div class="col"><div class="card test-card h-100"><div class="card-body"><h5 class="card-title"><span class="badge bg-success">POST</span> Save Batch</h5><button class="btn btn-sm btn-outline-secondary w-100 mt-3 run-test" data-url="/Test/TestSaveBatchBasket" data-method="POST">Çalıştır</button></div></div></div>
+		<div class="col"><div class="card test-card h-100"><div class="card-body"><h5 class="card-title"><span class="badge bg-warning text-dark">PUT</span> Update</h5><button class="btn btn-sm btn-outline-secondary w-100 mt-3 run-test" data-url="/Test/TestUpdateBasket" data-method="PUT">Çalıştır</button></div></div></div>
+		<div class="col"><div class="card test-card h-100"><div class="card-body"><h5 class="card-title"><span class="badge bg-warning text-dark">PUT</span> Update Batch</h5><button class="btn btn-sm btn-outline-secondary w-100 mt-3 run-test" data-url="/Test/TestUpdateBatchBasket" data-method="PUT">Çalıştır</button></div></div></div>
+		<div class="col"><div class="card test-card h-100"><div class="card-body"><h5 class="card-title"><span class="badge bg-danger">DELETE</span> Delete</h5><button class="btn btn-sm btn-outline-secondary w-100 mt-3 run-test" data-url="/Test/TestDeleteBasket?id=BASKET-001" data-method="DELETE">Çalıştır</button></div></div></div>
+		<div class="col"><div class="card test-card h-100"><div class="card-body"><h5 class="card-title"><span class="badge bg-danger">POST</span> Flush</h5><button class="btn btn-sm btn-outline-secondary w-100 mt-3 run-test" data-url="/Test/TestFlushBasket?userId=test-user-123" data-method="POST">Çalıştır</button></div></div></div>
+	</div>
+
+	<h4 class="mt-4"><i class="bi bi-flag-fill text-muted"></i> Opportunity</h4>
+	<div class="row row-cols-2 row-cols-md-3 row-cols-lg-5 g-4">
+		<div class="col"><div class="card test-card h-100"><div class="card-body"><h5 class="card-title"><span class="badge bg-success">POST</span> Save</h5><button class="btn btn-sm btn-outline-secondary w-100 mt-3 run-test" data-url="/Test/TestSaveOpportunity" data-method="POST">Çalıştır</button></div></div></div>
+		<div class="col"><div class="card test-card h-100"><div class="card-body"><h5 class="card-title"><span class="badge bg-success">POST</span> Save Batch</h5><button class="btn btn-sm btn-outline-secondary w-100 mt-3 run-test" data-url="/Test/TestSaveBatchOpportunity" data-method="POST">Çalıştır</button></div></div></div>
+		<div class="col"><div class="card test-card h-100"><div class="card-body"><h5 class="card-title"><span class="badge bg-warning text-dark">PUT</span> Update</h5><button class="btn btn-sm btn-outline-secondary w-100 mt-3 run-test" data-url="/Test/TestUpdateOpportunity" data-method="PUT">Çalıştır</button></div></div></div>
+		<div class="col"><div class="card test-card h-100"><div class="card-body"><h5 class="card-title"><span class="badge bg-warning text-dark">PUT</span> Update Batch</h5><button class="btn btn-sm btn-outline-secondary w-100 mt-3 run-test" data-url="/Test/TestUpdateBatchOpportunity" data-method="PUT">Çalıştır</button></div></div></div>
+		<div class="col"><div class="card test-card h-100"><div class="card-body"><h5 class="card-title"><span class="badge bg-danger">DELETE</span> Delete</h5><button class="btn btn-sm btn-outline-secondary w-100 mt-3 run-test" data-url="/Test/TestDeleteOpportunity?id=OPP-001" data-method="DELETE">Çalıştır</button></div></div></div>
+	</div>
+
+	<h4 class="mt-4"><i class="bi bi-tag-fill text-muted"></i> PriceOffer</h4>
+	<div class="row row-cols-2 row-cols-md-3 row-cols-lg-5 g-4">
+		<div class="col"><div class="card test-card h-100"><div class="card-body"><h5 class="card-title"><span class="badge bg-success">POST</span> Save</h5><button class="btn btn-sm btn-outline-secondary w-100 mt-3 run-test" data-url="/Test/TestSavePriceOffer" data-method="POST">Çalıştır</button></div></div></div>
+		<div class="col"><div class="card test-card h-100"><div class="card-body"><h5 class="card-title"><span class="badge bg-success">POST</span> Save Batch</h5><button class="btn btn-sm btn-outline-secondary w-100 mt-3 run-test" data-url="/Test/TestSaveBatchPriceOffer" data-method="POST">Çalıştır</button></div></div></div>
+		<div class="col"><div class="card test-card h-100"><div class="card-body"><h5 class="card-title"><span class="badge bg-warning text-dark">PUT</span> Update</h5><button class="btn btn-sm btn-outline-secondary w-100 mt-3 run-test" data-url="/Test/TestUpdatePriceOffer" data-method="PUT">Çalıştır</button></div></div></div>
+		<div class="col"><div class="card test-card h-100"><div class="card-body"><h5 class="card-title"><span class="badge bg-warning text-dark">PUT</span> Update Batch</h5><button class="btn btn-sm btn-outline-secondary w-100 mt-3 run-test" data-url="/Test/TestUpdateBatchPriceOffer" data-method="PUT">Çalıştır</button></div></div></div>
+		<div class="col"><div class="card test-card h-100"><div class="card-body"><h5 class="card-title"><span class="badge bg-danger">DELETE</span> Delete</h5><button class="btn btn-sm btn-outline-secondary w-100 mt-3 run-test" data-url="/Test/TestDeletePriceOffer?id=OFFER-001" data-method="DELETE">Çalıştır</button></div></div></div>
+	</div>
+
+	<h4 class="mt-4"><i class="bi bi-receipt text-muted"></i> Sale</h4>
+	<div class="row row-cols-2 row-cols-md-3 row-cols-lg-5 g-4">
+		<div class="col"><div class="card test-card h-100"><div class="card-body"><h5 class="card-title"><span class="badge bg-success">POST</span> Save</h5><button class="btn btn-sm btn-outline-secondary w-100 mt-3 run-test" data-url="/Test/TestSaveSale" data-method="POST">Çalıştır</button></div></div></div>
+		<div class="col"><div class="card test-card h-100"><div class="card-body"><h5 class="card-title"><span class="badge bg-success">POST</span> Save Batch</h5><button class="btn btn-sm btn-outline-secondary w-100 mt-3 run-test" data-url="/Test/TestSaveBatchSale" data-method="POST">Çalıştır</button></div></div></div>
+		<div class="col"><div class="card test-card h-100"><div class="card-body"><h5 class="card-title"><span class="badge bg-warning text-dark">PUT</span> Update</h5><button class="btn btn-sm btn-outline-secondary w-100 mt-3 run-test" data-url="/Test/TestUpdateSale" data-method="PUT">Çalıştır</button></div></div></div>
+		<div class="col"><div class="card test-card h-100"><div class="card-body"><h5 class="card-title"><span class="badge bg-warning text-dark">PUT</span> Update Batch</h5><button class="btn btn-sm btn-outline-secondary w-100 mt-3 run-test" data-url="/Test/TestUpdateBatchSale" data-method="PUT">Çalıştır</button></div></div></div>
+		<div class="col"><div class="card test-card h-100"><div class="card-body"><h5 class="card-title"><span class="badge bg-danger">DELETE</span> Delete</h5><button class="btn btn-sm btn-outline-secondary w-100 mt-3 run-test" data-url="/Test/TestDeleteSale?id=SALE-001" data-method="DELETE">Çalıştır</button></div></div></div>
+	</div>
+
+	<h4 class="mt-4"><i class="bi bi-person-plus-fill text-muted"></i> Lead</h4>
+	<div class="row row-cols-2 row-cols-md-3 row-cols-lg-5 g-4">
+		<div class="col"><div class="card test-card h-100"><div class="card-body"><h5 class="card-title"><span class="badge bg-success">POST</span> Save</h5><button class="btn btn-sm btn-outline-secondary w-100 mt-3 run-test" data-url="/Test/TestSaveLead" data-method="POST">Çalıştır</button></div></div></div>
+		<div class="col"><div class="card test-card h-100"><div class="card-body"><h5 class="card-title"><span class="badge bg-success">POST</span> Save Batch</h5><button class="btn btn-sm btn-outline-secondary w-100 mt-3 run-test" data-url="/Test/TestSaveBatchLead" data-method="POST">Çalıştır</button></div></div></div>
+		<div class="col"><div class="card test-card h-100"><div class="card-body"><h5 class="card-title"><span class="badge bg-warning text-dark">PUT</span> Update</h5><button class="btn btn-sm btn-outline-secondary w-100 mt-3 run-test" data-url="/Test/TestUpdateLead" data-method="PUT">Çalıştır</button></div></div></div>
+		<div class="col"><div class="card test-card h-100"><div class="card-body"><h5 class="card-title"><span class="badge bg-warning text-dark">PUT</span> Update Batch</h5><button class="btn btn-sm btn-outline-secondary w-100 mt-3 run-test" data-url="/Test/TestUpdateBatchLead" data-method="PUT">Çalıştır</button></div></div></div>
+		<div class="col"><div class="card test-card h-100"><div class="card-body"><h5 class="card-title"><span class="badge bg-danger">DELETE</span> Delete</h5><button class="btn btn-sm btn-outline-secondary w-100 mt-3 run-test" data-url="/Test/TestDeleteLead?id=LEAD-001" data-method="DELETE">Çalıştır</button></div></div></div>
+	</div>
+
+	<h4 class="mt-4"><i class="bi bi-box-arrow-left text-muted"></i> Return</h4>
+	<div class="row row-cols-2 row-cols-md-3 row-cols-lg-5 g-4">
+		<div class="col"><div class="card test-card h-100"><div class="card-body"><h5 class="card-title"><span class="badge bg-success">POST</span> Save</h5><button class="btn btn-sm btn-outline-secondary w-100 mt-3 run-test" data-url="/Test/TestSaveReturn" data-method="POST">Çalıştır</button></div></div></div>
+		<div class="col"><div class="card test-card h-100"><div class="card-body"><h5 class="card-title"><span class="badge bg-success">POST</span> Save Batch</h5><button class="btn btn-sm btn-outline-secondary w-100 mt-3 run-test" data-url="/Test/TestSaveBatchReturn" data-method="POST">Çalıştır</button></div></div></div>
+		<div class="col"><div class="card test-card h-100"><div class="card-body"><h5 class="card-title"><span class="badge bg-warning text-dark">PUT</span> Update</h5><button class="btn btn-sm btn-outline-secondary w-100 mt-3 run-test" data-url="/Test/TestUpdateReturn" data-method="PUT">Çalıştır</button></div></div></div>
+		<div class="col"><div class="card test-card h-100"><div class="card-body"><h5 class="card-title"><span class="badge bg-warning text-dark">PUT</span> Update Batch</h5><button class="btn btn-sm btn-outline-secondary w-100 mt-3 run-test" data-url="/Test/TestUpdateBatchReturn" data-method="PUT">Çalıştır</button></div></div></div>
+		<div class="col"><div class="card test-card h-100"><div class="card-body"><h5 class="card-title"><span class="badge bg-danger">DELETE</span> Delete</h5><button class="btn btn-sm btn-outline-secondary w-100 mt-3 run-test" data-url="/Test/TestDeleteReturn?id=RET-001" data-method="DELETE">Çalıştır</button></div></div></div>
+	</div>
+
+	<h4 class="mt-4"><i class="bi bi-calendar-check-fill text-muted"></i> Activity: Appointment</h4>
+	<div class="row row-cols-2 row-cols-md-3 row-cols-lg-5 g-4">
+		<div class="col"><div class="card test-card h-100"><div class="card-body"><h5 class="card-title"><span class="badge bg-success">POST</span> Save</h5><button class="btn btn-sm btn-outline-secondary w-100 mt-3 run-test" data-url="/Test/TestSaveActivityAppointment" data-method="POST">Çalıştır</button></div></div></div>
+		<div class="col"><div class="card test-card h-100"><div class="card-body"><h5 class="card-title"><span class="badge bg-success">POST</span> Save Batch</h5><button class="btn btn-sm btn-outline-secondary w-100 mt-3 run-test" data-url="/Test/TestSaveBatchActivityAppointment" data-method="POST">Çalıştır</button></div></div></div>
+		<div class="col"><div class="card test-card h-100"><div class="card-body"><h5 class="card-title"><span class="badge bg-warning text-dark">PUT</span> Update</h5><button class="btn btn-sm btn-outline-secondary w-100 mt-3 run-test" data-url="/Test/TestUpdateActivityAppointment" data-method="PUT">Çalıştır</button></div></div></div>
+		<div class="col"><div class="card test-card h-100"><div class="card-body"><h5 class="card-title"><span class="badge bg-warning text-dark">PUT</span> Update Batch</h5><button class="btn btn-sm btn-outline-secondary w-100 mt-3 run-test" data-url="/Test/TestUpdateBatchActivityAppointment" data-method="PUT">Çalıştır</button></div></div></div>
+		<div class="col"><div class="card test-card h-100"><div class="card-body"><h5 class="card-title"><span class="badge bg-danger">DELETE</span> Delete</h5><button class="btn btn-sm btn-outline-secondary w-100 mt-3 run-test" data-url="/Test/TestDeleteActivityAppointment?id=ACT-APP-001" data-method="DELETE">Çalıştır</button></div></div></div>
+	</div>
+
+	<h4 class="mt-4"><i class="bi bi-calendar-event-fill text-muted"></i> Activity: Meeting</h4>
+	<div class="row row-cols-2 row-cols-md-3 row-cols-lg-5 g-4">
+		<div class="col"><div class="card test-card h-100"><div class="card-body"><h5 class="card-title"><span class="badge bg-success">POST</span> Save</h5><button class="btn btn-sm btn-outline-secondary w-100 mt-3 run-test" data-url="/Test/TestSaveActivityMeeting" data-method="POST">Çalıştır</button></div></div></div>
+		<div class="col"><div class="card test-card h-100"><div class="card-body"><h5 class="card-title"><span class="badge bg-success">POST</span> Save Batch</h5><button class="btn btn-sm btn-outline-secondary w-100 mt-3 run-test" data-url="/Test/TestSaveBatchActivityMeeting" data-method="POST">Çalıştır</button></div></div></div>
+		<div class="col"><div class="card test-card h-100"><div class="card-body"><h5 class="card-title"><span class="badge bg-warning text-dark">PUT</span> Update</h5><button class="btn btn-sm btn-outline-secondary w-100 mt-3 run-test" data-url="/Test/TestUpdateActivityMeeting" data-method="PUT">Çalıştır</button></div></div></div>
+		<div class="col"><div class="card test-card h-100"><div class="card-body"><h5 class="card-title"><span class="badge bg-warning text-dark">PUT</span> Update Batch</h5><button class="btn btn-sm btn-outline-secondary w-100 mt-3 run-test" data-url="/Test/TestUpdateBatchActivityMeeting" data-method="PUT">Çalıştır</button></div></div></div>
+		<div class="col"><div class="card test-card h-100"><div class="card-body"><h5 class="card-title"><span class="badge bg-danger">DELETE</span> Delete</h5><button class="btn btn-sm btn-outline-secondary w-100 mt-3 run-test" data-url="/Test/TestDeleteActivityMeeting?id=ACT-MET-001" data-method="DELETE">Çalıştır</button></div></div></div>
+	</div>
+
+	<h4 class="mt-4"><i class="bi bi-telephone-fill text-muted"></i> Activity: Phone</h4>
+	<div class="row row-cols-2 row-cols-md-3 row-cols-lg-5 g-4">
+		<div class="col"><div class="card test-card h-100"><div class="card-body"><h5 class="card-title"><span class="badge bg-success">POST</span> Save</h5><button class="btn btn-sm btn-outline-secondary w-100 mt-3 run-test" data-url="/Test/TestSaveActivityPhone" data-method="POST">Çalıştır</button></div></div></div>
+		<div class="col"><div class="card test-card h-100"><div class="card-body"><h5 class="card-title"><span class="badge bg-success">POST</span> Save Batch</h5><button class="btn btn-sm btn-outline-secondary w-100 mt-3 run-test" data-url="/Test/TestSaveBatchActivityPhone" data-method="POST">Çalıştır</button></div></div></div>
+		<div class="col"><div class="card test-card h-100"><div class="card-body"><h5 class="card-title"><span class="badge bg-warning text-dark">PUT</span> Update</h5><button class="btn btn-sm btn-outline-secondary w-100 mt-3 run-test" data-url="/Test/TestUpdateActivityPhone" data-method="PUT">Çalıştır</button></div></div></div>
+		<div class="col"><div class="card test-card h-100"><div class="card-body"><h5 class="card-title"><span class="badge bg-warning text-dark">PUT</span> Update Batch</h5><button class="btn btn-sm btn-outline-secondary w-100 mt-3 run-test" data-url="/Test/TestUpdateBatchActivityPhone" data-method="PUT">Çalıştır</button></div></div></div>
+		<div class="col"><div class="card test-card h-100"><div class="card-body"><h5 class="card-title"><span class="badge bg-danger">DELETE</span> Delete</h5><button class="btn btn-sm btn-outline-secondary w-100 mt-3 run-test" data-url="/Test/TestDeleteActivityPhone?id=ACT-PHN-001" data-method="DELETE">Çalıştır</button></div></div></div>
+	</div>
+
+	<h4 class="mt-4"><i class="bi bi-headset text-muted"></i> Activity: Support</h4>
+	<div class="row row-cols-2 row-cols-md-3 row-cols-lg-5 g-4">
+		<div class="col"><div class="card test-card h-100"><div class="card-body"><h5 class="card-title"><span class="badge bg-success">POST</span> Save</h5><button class="btn btn-sm btn-outline-secondary w-100 mt-3 run-test" data-url="/Test/TestSaveActivitySupport" data-method="POST">Çalıştır</button></div></div></div>
+		<div class="col"><div class="card test-card h-100"><div class="card-body"><h5 class="card-title"><span class="badge bg-success">POST</span> Save Batch</h5><button class="btn btn-sm btn-outline-secondary w-100 mt-3 run-test" data-url="/Test/TestSaveBatchActivitySupport" data-method="POST">Çalıştır</button></div></div></div>
+		<div class="col"><div class="card test-card h-100"><div class="card-body"><h5 class="card-title"><span class="badge bg-warning text-dark">PUT</span> Update</h5><button class="btn btn-sm btn-outline-secondary w-100 mt-3 run-test" data-url="/Test/TestUpdateActivitySupport" data-method="PUT">Çalıştır</button></div></div></div>
+		<div class="col"><div class="card test-card h-100"><div class="card-body"><h5 class="card-title"><span class="badge bg-warning text-dark">PUT</span> Update Batch</h5><button class="btn btn-sm btn-outline-secondary w-100 mt-3 run-test" data-url="/Test/TestUpdateBatchActivitySupport" data-method="PUT">Çalıştır</button></div></div></div>
+		<div class="col"><div class="card test-card h-100"><div class="card-body"><h5 class="card-title"><span class="badge bg-danger">DELETE</span> Delete</h5><button class="btn btn-sm btn-outline-secondary w-100 mt-3 run-test" data-url="/Test/TestDeleteActivitySupport?id=ACT-SUP-001" data-method="DELETE">Çalıştır</button></div></div></div>
+	</div>
+
+	<h2 class="section-title mt-5"><i class="bi bi-send-fill fs-4 text-primary"></i> EventSender Testleri</h2>
+	<div class="row row-cols-2 row-cols-md-3 row-cols-lg-5 g-4">
+		<div class="col"><div class="card test-card h-100"><div class="card-body"><h5 class="card-title"><span class="badge bg-primary">POST</span> SetSession</h5><button class="btn btn-sm btn-outline-secondary w-100 mt-3 run-test" data-url="/Test/TestSetSession" data-method="POST">Çalıştır</button></div></div></div>
+		<div class="col"><div class="card test-card h-100"><div class="card-body"><h5 class="card-title"><span class="badge bg-primary">POST</span> LoginEvent</h5><button class="btn btn-sm btn-outline-secondary w-100 mt-3 run-test" data-url="/Test/TestSendLoginEvent" data-method="POST">Çalıştır</button></div></div></div>
+		<div class="col"><div class="card test-card h-100"><div class="card-body"><h5 class="card-title"><span class="badge bg-primary">POST</span> LogoutEvent</h5><button class="btn btn-sm btn-outline-secondary w-100 mt-3 run-test" data-url="/Test/TestSendLogoutEvent" data-method="POST">Çalıştır</button></div></div></div>
+		<div class="col"><div class="card test-card h-100"><div class="card-body"><h5 class="card-title"><span class="badge bg-primary">POST</span> AddToBasket</h5><button class="btn btn-sm btn-outline-secondary w-100 mt-3 run-test" data-url="/Test/TestSendAddToBasketEvent" data-method="POST">Çalıştır</button></div></div></div>
+		<div class="col"><div class="card test-card h-100"><div class="card-body"><h5 class="card-title"><span class="badge bg-primary">POST</span> RemoveFromBasket</h5><button class="btn btn-sm btn-outline-secondary w-100 mt-3 run-test" data-url="/Test/TestSendRemoveFromBasketEvent" data-method="POST">Çalıştır</button></div></div></div>
+		<div class="col"><div class="card test-card h-100"><div class="card-body"><h5 class="card-title"><span class="badge bg-primary">POST</span> PageView</h5><button class="btn btn-sm btn-outline-secondary w-100 mt-3 run-test" data-url="/Test/TestSendPageViewEvent" data-method="POST">Çalıştır</button></div></div></div>
+		<div class="col"><div class="card test-card h-100"><div class="card-body"><h5 class="card-title"><span class="badge bg-primary">POST</span> Goal</h5><button class="btn btn-sm btn-outline-secondary w-100 mt-3 run-test" data-url="/Test/TestSendGoalEvent" data-method="POST">Çalıştır</button></div></div></div>
+		<div class="col"><div class="card test-card h-100"><div class="card-body"><h5 class="card-title"><span class="badge bg-primary">POST</span> Search</h5><button class="btn btn-sm btn-outline-secondary w-100 mt-3 run-test" data-url="/Test/TestSendSearchEvent" data-method="POST">Çalıştır</button></div></div></div>
+		<div class="col"><div class="card test-card h-100"><div class="card-body"><h5 class="card-title"><span class="badge bg-primary">POST</span> Custom</h5><button class="btn btn-sm btn-outline-secondary w-100 mt-3 run-test" data-url="/Test/TestSendCustomEvent" data-method="POST">Çalıştır</button></div></div></div>
+	</div>
+</div>
+
+<div class="modal fade" id="responseModal" tabindex="-1" aria-labelledby="responseModalLabel" aria-hidden="true">
+	<div class="modal-dialog modal-xl modal-dialog-centered">
+		<div class="modal-content">
+			<div class="modal-header"><h5 class="modal-title" id="responseModalLabel">API Yanıtı</h5><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div>
+			<div class="modal-body"><div id="modal-endpoint" class="text-muted small mb-2 fw-bold"></div><div id="modal-response-content" class="response-area"></div></div>
+			<div class="modal-footer"><button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Kapat</button></div>
+		</div>
+	</div>
+</div>
+
+@section Scripts {
+	<script>
+		$(document).ready(function () {
+			var responseModal = new bootstrap.Modal(document.getElementById('responseModal'));
+			$('.run-test').on('click', function (e) {
+				e.preventDefault();
+				var button = $(this);
+				var url = button.data('url');
+				var method = button.data('method');
+				$('#modal-endpoint').text(method + ' ' + url);
+				$('#modal-response-content').html('<div class="d-flex justify-content-center align-items-center" style="min-height: 200px;"><div class="spinner-border text-primary" role="status"><span class="visually-hidden">Loading...</span></div></div>');
+				responseModal.show();
+				$.ajax({
+					url: url, type: method, contentType: 'application/json',
+					beforeSend: function(){ button.prop('disabled', true).addClass('disabled'); },
+					success: function (data) { $('#modal-response-content').text(JSON.stringify(data, null, 2)); },
+					error: function (jqXHR, textStatus, errorThrown) {
+						var errorText = `Hata: ${jqXHR.status} ${errorThrown}\n\n${jqXHR.responseText}`;
+						$('#modal-response-content').text(errorText);
+					},
+					complete: function(){ button.prop('disabled', false).removeClass('disabled'); }
+				});
+			});
+		});
+	</script>
+}

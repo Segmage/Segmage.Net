@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
     <PropertyGroup>
         <Description>Segmage; Data &amp; Event Sender</Description>
         <VersionPrefix>1.0.0.1</VersionPrefix>

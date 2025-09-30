@@ -12,7 +12,7 @@ var app = builder.Build();
 //test
 app.MapGet("/", async ( ) =>
 {
-    await SegmageApp.DefaultInstance.EventSender.SendLoginEventAsync("loginEventUniqName",new LoginEvent
+    await SegmageApp.DefaultInstance.EventSender.SendLoginEventAsync("loginEventUniqName",new Login
     {
          UserId = "LoginUserID",SessionId = new Guid()
     });
