@@ -22,7 +22,7 @@
         <PackageReadmeFile>README.md</PackageReadmeFile>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
         <Title>Segmage</Title>
-        <Version>1.0.0.17</Version>
+        <Version>1.0.0.18</Version>
         <Copyright>Segmage 2025</Copyright>
         <RepositoryUrl>https://github.com/Segmage/Segmage.Net.git</RepositoryUrl>
         <RepositoryType>git</RepositoryType>
