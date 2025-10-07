@@ -10,5 +10,9 @@ namespace Segmage.Models
 	{
 		public string Id { get; set; }
 
+		public Guid SessionId { get; set; }
+
+		public Guid DeviceId { get; set; }
+
 	}
 }

@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Segmage.Models;
+using System.Reflection.Metadata;
 
 namespace Segmage.AspNetCore.Extensions;
 
@@ -64,7 +65,7 @@ public static class SessionMiddlewareExtensions
 					action.UserId = session.UserId;
 				}
 			}
-			if (entity is Session sessionAction)
+			else if (entity is Session sessionAction)
 			{
 				var session = SegmageHttpContext.GetSgSession().GetAwaiter().GetResult();
 				if (session != null)
@@ -73,6 +74,21 @@ public static class SessionMiddlewareExtensions
 					{
 						sessionAction.DeviceId = deviceId;
 					}
+				}
+			}
+			else
+			{
+				var session = SegmageHttpContext.GetSgSession().GetAwaiter().GetResult();
+				var properties = entity.GetType().GetProperties().ToList();
+				var sessionProperty = properties.SingleOrDefault(p => p.Name == "SessionId");
+				var deviceProperty = properties.SingleOrDefault(p => p.Name == "DeviceId");
+				if (sessionProperty != null)
+				{
+					sessionProperty.SetValue(entity, Guid.Parse(SegmageHttpContext.GetSgSession().GetAwaiter().GetResult()?.Id ?? Guid.Empty.ToString()));
+				}
+				if (deviceProperty != null)
+				{
+					deviceProperty.SetValue(entity, Guid.Parse(SegmageHttpContext.GetSgSession().GetAwaiter().GetResult()?.Id ?? Guid.Empty.ToString()));
 				}
 			}
 		};
