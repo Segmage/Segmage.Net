@@ -88,7 +88,7 @@ public static class SessionMiddlewareExtensions
 				}
 				if (deviceProperty != null)
 				{
-					deviceProperty.SetValue(entity, Guid.Parse(SegmageHttpContext.GetSgSession().GetAwaiter().GetResult()?.Id ?? Guid.Empty.ToString()));
+					deviceProperty.SetValue(entity, Guid.Parse(SegmageHttpContext.GetSgSession().GetAwaiter().GetResult()?.DeviceId ?? Guid.Empty.ToString()));
 				}
 			}
 		};
