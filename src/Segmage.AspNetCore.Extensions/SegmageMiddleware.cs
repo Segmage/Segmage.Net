@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Session;
 using Segmage.Models;
 using System.Reflection.Metadata;
 
@@ -45,6 +46,10 @@ public static class SessionMiddlewareExtensions
 	public static IApplicationBuilder UseSegmage(this IApplicationBuilder app)
 	{
 		SegmageHttpContext.Services = app.ApplicationServices;
+		if (app.ApplicationServices.GetService(typeof(ISessionStore)) == null)
+		{
+			throw new InvalidOperationException("Session services are not registered. Please call '.AddSession()' in your Program.cs or ConfigureServices method  before calling UseSegmage method");
+		}
 		SegmageGlobal.OnBeforeRequestSend = (entity) =>
 		{
 			if (entity is SegmageAction action)
@@ -84,11 +89,11 @@ public static class SessionMiddlewareExtensions
 				var deviceProperty = properties.SingleOrDefault(p => p.Name == "DeviceId");
 				if (sessionProperty != null)
 				{
-					sessionProperty.SetValue(entity, Guid.Parse(SegmageHttpContext.GetSgSession().GetAwaiter().GetResult()?.Id ?? Guid.Empty.ToString()));
+					sessionProperty.SetValue(entity, Guid.Parse(session?.Id ?? Guid.Empty.ToString()));
 				}
 				if (deviceProperty != null)
 				{
-					deviceProperty.SetValue(entity, Guid.Parse(SegmageHttpContext.GetSgSession().GetAwaiter().GetResult()?.DeviceId ?? Guid.Empty.ToString()));
+					deviceProperty.SetValue(entity, Guid.Parse(session?.DeviceId ?? Guid.Empty.ToString()));
 				}
 			}
 		};
