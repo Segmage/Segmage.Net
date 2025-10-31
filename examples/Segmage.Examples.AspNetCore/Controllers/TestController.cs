@@ -33,7 +33,7 @@ namespace Segmage.Examples.AspNetCore.Controllers
 		[HttpGet]
 		public async Task<IActionResult> ReadSession()
 		{
-			var session = await SegmageHttpContext.GetSgSession();
+			var session = SegmageHttpContext.GetSgCookie();
 			if (session == null)
 			{
 				return NotFound("Segmage session not found. Please run /Test/SetupCookie first.");
@@ -918,7 +918,7 @@ namespace Segmage.Examples.AspNetCore.Controllers
 		[HttpPost]
 		public async Task<IActionResult> TestSetSession()
 		{
-			var sgSession = await SegmageHttpContext.GetSgSession();
+			var sgSession = SegmageHttpContext.GetSgCookie();
 			var session = new Session
 			{
 				Id = Guid.Parse(sgSession.Id),

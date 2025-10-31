@@ -43,24 +43,10 @@ namespace Segmage.Core.Extensions
 				throw new ArgumentNullException(nameof(services));
 			}
 
-			// --- START: Added Checks ---
-
-			// Check if IHttpContextAccessor is already registered. If not, add it.
-			// This is equivalent to builder.Services.AddHttpContextAccessor();
 			if (!services.Any(d => d.ServiceType == typeof(IHttpContextAccessor)))
 			{
 				services.AddHttpContextAccessor();
 			}
-
-			// Check if a core session service (ISessionStore) is registered. If not, add session services.
-			// This is equivalent to builder.Services.AddSession();
-			if (!services.Any(d => d.ServiceType == typeof(ISessionStore)))
-			{
-				services.AddSession();
-			}
-
-			// --- END: Added Checks ---
-
 			SegmageApp.CreateInstance(options, name);
 			return services;
 		}

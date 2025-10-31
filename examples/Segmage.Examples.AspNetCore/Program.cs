@@ -7,7 +7,6 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddControllersWithViews();
-builder.Services.AddSession();
 var token=builder.Configuration.GetValue<string>("SegmageAccessToken");
 builder.Services.AddSegmage(token);
 var app = builder.Build();
@@ -20,7 +19,6 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 
-app.UseSession();
 app.UseSegmage();
 app.UseHttpsRedirection();
 app.UseStaticFiles();
