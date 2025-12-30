@@ -5,6 +5,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using Segmage.Models;
+using Segmage.Models.Entities;
 
 namespace Segmage.Services
 {
@@ -280,6 +281,29 @@ namespace Segmage.Services
 		public async Task<ServiceResult> DeleteActivitySupport(string id, CancellationToken cancellationToken = default)
 		{
 			var path = string.Format(ApiUriConsts.ACTIVITYSUPPORT_BY_ID, _baseUrl, id);
+			return await DeleteRequestAsync(path, cancellationToken);
+		}
+
+		#endregion
+
+
+		#region MobileToken Methods
+
+		public async Task<ServiceResult> SaveMobilePushToken(MobilePushToken entity, CancellationToken cancellationToken = default) =>
+			await PostRequestAsync(string.Format(ApiUriConsts.MOBILEPUSHTOKEN, _baseUrl), entity, cancellationToken);
+
+		public async Task<ServiceResult> SaveBatchMobilePushToken(List<MobilePushToken> entities, CancellationToken cancellationToken = default) =>
+			await PostRequestAsync(string.Format(ApiUriConsts.MOBILEPUSHTOKEN_BATCH, _baseUrl), entities, cancellationToken);
+
+		public async Task<ServiceResult> UpdateMobilePushToken(MobilePushToken entity, CancellationToken cancellationToken = default) =>
+			await PutRequestAsync(string.Format(ApiUriConsts.MOBILEPUSHTOKEN, _baseUrl), entity, cancellationToken);
+
+		public async Task<ServiceResult> UpdateBatchMobilePushToken(List<MobilePushToken> entities, CancellationToken cancellationToken = default) =>
+			await PutRequestAsync(string.Format(ApiUriConsts.MOBILEPUSHTOKEN_BATCH, _baseUrl), entities, cancellationToken);
+
+		public async Task<ServiceResult> DeleteMobilePushToken(string id, CancellationToken cancellationToken = default)
+		{
+			var path = string.Format(ApiUriConsts.MOBILEPUSHTOKEN_BY_ID, _baseUrl, id);
 			return await DeleteRequestAsync(path, cancellationToken);
 		}
 

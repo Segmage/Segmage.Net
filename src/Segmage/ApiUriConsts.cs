@@ -74,6 +74,11 @@ namespace Segmage
 		public const string ACTIVITYSUPPORT_BATCH = "{0}/dt/activitysupport/batch";
 		public const string ACTIVITYSUPPORT_BY_ID = "{0}/dt/activitysupport/{1}";
 
+		// MobilePushToken
+		public const string MOBILEPUSHTOKEN = "{0}/dt/mobilepushtoken";
+		public const string MOBILEPUSHTOKEN_BATCH = "{0}/dt/mobilepushtoken/batch";
+		public const string MOBILEPUSHTOKEN_BY_ID = "{0}/dt/mobilepushtoken/{1}";
+
 		// Other
 		public const string OTHER = "{0}/dt/other";
 		public const string OTHER_BATCH = "{0}/dt/other/batch";
