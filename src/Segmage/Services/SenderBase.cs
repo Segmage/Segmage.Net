@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System;
 using System.Net.Http;
 using System.Net.Http.Headers;
@@ -12,25 +12,28 @@ namespace Segmage.Services
 	public abstract class SenderBase
 	{
 		private readonly AppOptions _options;
+
+		// Null değerleri ignore etmek için ortak ayar
+		private readonly JsonSerializerSettings _jsonSettings = new JsonSerializerSettings
+		{
+			NullValueHandling = NullValueHandling.Ignore
+		};
+
 		private string ToRequestUri(string path)
 		{
 			var url = string.Format(path, _options.Credential.CollectUrl, "{1}");
 			return url;
 		}
 
-		/// <summary>
-		/// 
-		/// </summary>
-		/// <param name="options"></param>
 		protected SenderBase(AppOptions options)
 		{
 			_options = options;
 		}
+
 		protected async Task<ServiceResult> PostRequestAsync(string path, object body, CancellationToken cancellationToken = default)
 		{
 			return await SendRequestWithBodyAsync(HttpMethod.Post, path, body, cancellationToken);
 		}
-
 
 		protected async Task<ServiceResult> PutRequestAsync(string path, object body, CancellationToken cancellationToken = default)
 		{
@@ -72,7 +75,10 @@ namespace Segmage.Services
 					SegmageGlobal.OnBeforeRequestSend?.Invoke(body);
 					request.Headers.TryAddWithoutValidation("Authorization", "Bearer " + _options.Credential.AccessToken);
 					request.Headers.TryAddWithoutValidation("accept", "*/*");
-					var jsonModel = JsonConvert.SerializeObject(body);
+
+					// GÜNCELLEME: Burada _jsonSettings kullanılarak null değerler ignore ediliyor
+					var jsonModel = JsonConvert.SerializeObject(body, _jsonSettings);
+
 					request.Content = new StringContent(jsonModel);
 					request.Content.Headers.ContentType = MediaTypeHeaderValue.Parse("application/json");
 
@@ -106,7 +112,10 @@ namespace Segmage.Services
 						TypeName = moduleName,
 						SerializedData = body
 					};
-					request.Content = new StringContent(JsonConvert.SerializeObject(uploadContext));
+
+					// GÜNCELLEME: UploadContext içindeki null alanlar da gönderilmesin diye buraya da eklendi
+					request.Content = new StringContent(JsonConvert.SerializeObject(uploadContext, _jsonSettings));
+
 					request.Content.Headers.ContentType = MediaTypeHeaderValue.Parse("application/json");
 
 					var response = await httpClient.SendAsync(request, cancellationToken);
@@ -123,7 +132,6 @@ namespace Segmage.Services
 			}
 			return result;
 		}
-
 
 		protected async Task<T> GetRequestAsync<T>(string path, CancellationToken cancellationToken = default)
 		{
@@ -143,6 +151,7 @@ namespace Segmage.Services
 						var jsonData = await response.Content.ReadAsStringAsync();
 						var jsonObject = Newtonsoft.Json.Linq.JObject.Parse(jsonData);
 						var data = jsonObject["data"];
+						// Deserialize işleminde genellikle ignore gerekmez ama gerekirse settings buraya da verilebilir.
 						result = data.ToObject<T>();
 					}
 				}
@@ -173,7 +182,7 @@ namespace Segmage.Services
 
 				}
 			}
-			return false; ;
+			return false;
 		}
 	}
 }
